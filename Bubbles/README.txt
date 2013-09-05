@@ -1,4 +1,4 @@
-Buggles game.
+Bubbles game.
 Example: http://chainrxn.zwigglers.com/
 
 Description:
