@@ -22,9 +22,7 @@
 		C3806B5F17D8E84000207C36 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3806B5E17D8E84000207C36 /* MainStoryboard.storyboard */; };
 		C3806B9B17D9C63F00207C36 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C3806B9717D9BD3B00207C36 /* Shader.vsh */; };
 		C3806B9C17D9C64200207C36 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C3806B9917D9BD5300207C36 /* Shader.fsh */; };
-		C3806BA417DB0D6200207C36 /* black-square.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BA317DB0D6200207C36 /* black-square.png */; };
 		C3806BA817DB0E5300207C36 /* black-square40.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BA617DB0E5300207C36 /* black-square40.png */; };
-		C3806BA917DB0E5300207C36 /* black-square50.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BA717DB0E5300207C36 /* black-square50.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,9 +46,9 @@
 		C3806B5E17D8E84000207C36 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C3806B9717D9BD3B00207C36 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		C3806B9917D9BD5300207C36 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		C3806BA317DB0D6200207C36 /* black-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "black-square.png"; sourceTree = "<group>"; };
 		C3806BA617DB0E5300207C36 /* black-square40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square40.png"; path = "Tetris/black-square40.png"; sourceTree = "<group>"; };
 		C3806BA717DB0E5300207C36 /* black-square50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square50.png"; path = "Tetris/black-square50.png"; sourceTree = "<group>"; };
+		C3806BAA17DB11C300207C36 /* black-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square.png"; path = "Tetris/black-square.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,9 +129,9 @@
 		C3806BA517DB0E3700207C36 /* rsrc */ = {
 			isa = PBXGroup;
 			children = (
+				C3806BAA17DB11C300207C36 /* black-square.png */,
 				C3806BA617DB0E5300207C36 /* black-square40.png */,
 				C3806BA717DB0E5300207C36 /* black-square50.png */,
-				C3806BA317DB0D6200207C36 /* black-square.png */,
 			);
 			name = rsrc;
 			sourceTree = "<group>";
@@ -196,9 +194,7 @@
 				C3806B4F17D8E67800207C36 /* Default@2x.png in Resources */,
 				C3806B5117D8E67800207C36 /* Default-568h@2x.png in Resources */,
 				C3806B5F17D8E84000207C36 /* MainStoryboard.storyboard in Resources */,
-				C3806BA417DB0D6200207C36 /* black-square.png in Resources */,
 				C3806BA817DB0E5300207C36 /* black-square40.png in Resources */,
-				C3806BA917DB0E5300207C36 /* black-square50.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
