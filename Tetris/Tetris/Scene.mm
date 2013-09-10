@@ -7,7 +7,7 @@
 //
 
 #include "Scene.h"
-#import "Sprite.h"
+#include "GameField.h"
 
 ///
 Scene::Scene(const CGSize& size, const ShaderProgram& program)
@@ -15,9 +15,6 @@ Scene::Scene(const CGSize& size, const ShaderProgram& program)
 {
 	contentSize = size;
 
-	Sprite* sprite = new Sprite("black-square40.png", program_);
-	sprite->position.x = size.width/2;
-	sprite->position.y = size.height/2;
-
-	children_.push_back(std::unique_ptr<Node>(sprite));
+	GameField* field = new GameField(program_, GLKVector2Make(size.width/4, 0), CGSizeMake(size.width/2, size.height));
+	children_.push_back(std::unique_ptr<Node>(field));
 }

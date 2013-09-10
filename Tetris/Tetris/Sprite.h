@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 local. All rights reserved.
 //
 
+#ifndef __Tetris__Sprite__
+#define __Tetris__Sprite__
+
 #import "./Node.h"
 #include "./TexturedQuad.h"
 #include <string>
@@ -26,3 +29,5 @@ private:
 	GLKTextureInfo* textureInfo_;
 	TexturedQuad quad_;
 };
+
+#endif

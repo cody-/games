@@ -6,6 +6,9 @@
 //  Copyright (c) 2013 local. All rights reserved.
 //
 
+#ifndef __Tetris__Node__
+#define __Tetris__Node__
+
 #include "./ShaderProgram.h"
 #import <GLKit/GLKit.h>
 #include <vector>
@@ -30,3 +33,5 @@ protected:
 	const ShaderProgram& program_;
 	std::vector<std::unique_ptr<Node>> children_;
 };
+
+#endif

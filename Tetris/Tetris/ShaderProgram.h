@@ -20,11 +20,24 @@ struct Uniforms
 };
 
 ///
-struct ShaderProgram
+class ShaderProgram
 {
+public:
+	ShaderProgram();
+	~ShaderProgram();
+	bool LoadShaders();
+	void Use();
+
 	Uniforms uniforms;
 	GLKMatrix4 projectionMatrix;
 	GLKMatrix4 mvpMatrix;
+
+private:
+	bool CompileShader(GLuint* shader, GLenum type, NSString* file);
+	bool LinkProgram(GLuint prog);
+	bool ValidateProgram(GLuint prog);
+
+	GLuint handle;
 };
 
 #endif
