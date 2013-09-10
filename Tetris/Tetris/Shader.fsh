@@ -6,14 +6,13 @@
 //  Copyright (c) 2013 local. All rights reserved.
 //
 
-uniform sampler2D texture;
+uniform sampler2D texSampler;
 uniform lowp vec4 color;
 
 varying lowp vec2 texCoordVarying;
 
 void main()
 {
-    //gl_FragColor = vec4(0,1,0,1)*vec4(texture2D(texture,texCoordVarying).xyz,texture2D(texture,texCoordVarying).w);
-	lowp vec4 texColor = texture2D(texture, texCoordVarying);
+	lowp vec4 texColor = texture2D(texSampler, texCoordVarying);
 	gl_FragColor = mix(texColor, color, texColor.a);
 }

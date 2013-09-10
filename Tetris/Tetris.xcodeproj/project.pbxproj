@@ -18,11 +18,14 @@
 		C3806B5117D8E67800207C36 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806B5017D8E67800207C36 /* Default-568h@2x.png */; };
 		C3806B5917D8E6D900207C36 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B5717D8E6D900207C36 /* GLKit.framework */; };
 		C3806B5A17D8E6D900207C36 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B5817D8E6D900207C36 /* OpenGLES.framework */; };
-		C3806B5D17D8E71700207C36 /* TetrisViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3806B5C17D8E71700207C36 /* TetrisViewController.m */; };
+		C3806B5D17D8E71700207C36 /* TetrisViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806B5C17D8E71700207C36 /* TetrisViewController.mm */; };
 		C3806B5F17D8E84000207C36 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3806B5E17D8E84000207C36 /* MainStoryboard.storyboard */; };
 		C3806B9B17D9C63F00207C36 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C3806B9717D9BD3B00207C36 /* Shader.vsh */; };
 		C3806B9C17D9C64200207C36 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C3806B9917D9BD5300207C36 /* Shader.fsh */; };
 		C3806BA817DB0E5300207C36 /* black-square40.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BA617DB0E5300207C36 /* black-square40.png */; };
+		C3806BB317DE1C5000207C36 /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB217DE1C5000207C36 /* Node.mm */; };
+		C3806BB617DE201800207C36 /* Sprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB517DE201800207C36 /* Sprite.mm */; };
+		C3806BBB17DE2AA300207C36 /* Scene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB917DE2AA200207C36 /* Scene.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,13 +45,21 @@
 		C3806B5717D8E6D900207C36 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		C3806B5817D8E6D900207C36 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		C3806B5B17D8E71700207C36 /* TetrisViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TetrisViewController.h; sourceTree = "<group>"; };
-		C3806B5C17D8E71700207C36 /* TetrisViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TetrisViewController.m; sourceTree = "<group>"; };
+		C3806B5C17D8E71700207C36 /* TetrisViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TetrisViewController.mm; sourceTree = "<group>"; };
 		C3806B5E17D8E84000207C36 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		C3806B9717D9BD3B00207C36 /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		C3806B9917D9BD5300207C36 /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		C3806BA617DB0E5300207C36 /* black-square40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square40.png"; path = "Tetris/black-square40.png"; sourceTree = "<group>"; };
 		C3806BA717DB0E5300207C36 /* black-square50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square50.png"; path = "Tetris/black-square50.png"; sourceTree = "<group>"; };
 		C3806BAA17DB11C300207C36 /* black-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square.png"; path = "Tetris/black-square.png"; sourceTree = "<group>"; };
+		C3806BB117DE1C4F00207C36 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		C3806BB217DE1C5000207C36 /* Node.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Node.mm; sourceTree = "<group>"; };
+		C3806BB417DE201800207C36 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		C3806BB517DE201800207C36 /* Sprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Sprite.mm; sourceTree = "<group>"; };
+		C3806BB717DE211700207C36 /* TexturedQuad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TexturedQuad.h; sourceTree = "<group>"; };
+		C3806BB817DE261000207C36 /* ShaderProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
+		C3806BB917DE2AA200207C36 /* Scene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scene.mm; sourceTree = "<group>"; };
+		C3806BBA17DE2AA300207C36 /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,10 +115,18 @@
 				C3806B4A17D8E67800207C36 /* AppDelegate.m */,
 				C3806B4117D8E67800207C36 /* Supporting Files */,
 				C3806B5B17D8E71700207C36 /* TetrisViewController.h */,
-				C3806B5C17D8E71700207C36 /* TetrisViewController.m */,
+				C3806B5C17D8E71700207C36 /* TetrisViewController.mm */,
 				C3806B5E17D8E84000207C36 /* MainStoryboard.storyboard */,
 				C3806B9717D9BD3B00207C36 /* Shader.vsh */,
 				C3806B9917D9BD5300207C36 /* Shader.fsh */,
+				C3806BB117DE1C4F00207C36 /* Node.h */,
+				C3806BB217DE1C5000207C36 /* Node.mm */,
+				C3806BB417DE201800207C36 /* Sprite.h */,
+				C3806BB517DE201800207C36 /* Sprite.mm */,
+				C3806BB717DE211700207C36 /* TexturedQuad.h */,
+				C3806BB817DE261000207C36 /* ShaderProgram.h */,
+				C3806BBA17DE2AA300207C36 /* Scene.h */,
+				C3806BB917DE2AA200207C36 /* Scene.mm */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -207,7 +226,10 @@
 			files = (
 				C3806B4717D8E67800207C36 /* main.m in Sources */,
 				C3806B4B17D8E67800207C36 /* AppDelegate.m in Sources */,
-				C3806B5D17D8E71700207C36 /* TetrisViewController.m in Sources */,
+				C3806B5D17D8E71700207C36 /* TetrisViewController.mm in Sources */,
+				C3806BB317DE1C5000207C36 /* Node.mm in Sources */,
+				C3806BB617DE201800207C36 /* Sprite.mm in Sources */,
+				C3806BBB17DE2AA300207C36 /* Scene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

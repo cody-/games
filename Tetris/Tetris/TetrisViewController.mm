@@ -7,29 +7,14 @@
 //
 
 #import "TetrisViewController.h"
-
-typedef struct
-{
-	CGPoint geometryVertex;
-	CGPoint textureVertex;
-} TexturedVertex;
-
-typedef struct
-{
-	TexturedVertex bl;
-	TexturedVertex br;
-	TexturedVertex tl;
-	TexturedVertex tr;
-} TexturedQuad;
+#import "ShaderProgram.h"
+#import "Scene.h"
 
 @interface TetrisViewController()
 {
 	GLuint program_;
-	GLKMatrix4 mvpMatrix_;
-	GLint uniformMvpMatrix_;
-	GLint uniformTexture_;
-	GLint uniformColor_;
-	TexturedQuad quad_;
+	ShaderProgram shaderProgram_;
+	Scene* scene_;
 }
 
 @property (strong, nonatomic) EAGLContext* context;
@@ -59,27 +44,10 @@ typedef struct
 	view.context = self.context;
 	[EAGLContext setCurrentContext:self.context];
 
-	// Load texture
-	NSDictionary* options = @{GLKTextureLoaderOriginBottomLeft: @YES};
-	NSError* error;
-	self.textureInfo = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"black-square40" ofType:@"png"] options:options error:&error];
-	if (self.textureInfo == nil)
-	{
-		NSLog(@"Error loading file: %@", [error localizedDescription]);
-		return;
-	}
-
-	TexturedQuad newQuad;
-	newQuad.bl.geometryVertex = CGPointMake(0, 0);
-	newQuad.br.geometryVertex = CGPointMake(self.textureInfo.width, 0);
-	newQuad.tl.geometryVertex = CGPointMake(0, self.textureInfo.height);
-	newQuad.tr.geometryVertex = CGPointMake(self.textureInfo.width, self.textureInfo.height);
-
-	newQuad.bl.textureVertex = CGPointMake(0, 0);
-	newQuad.br.textureVertex = CGPointMake(1, 0);
-	newQuad.tl.textureVertex = CGPointMake(0, 1);
-	newQuad.tr.textureVertex = CGPointMake(1, 1);
-	quad_ = newQuad;
+	//NSLog(@"%f x %f", self.view.bounds.size.width, self.view.bounds.size.height);
+	CGSize windowSize = CGSizeMake(self.view.bounds.size.height, self.view.bounds.size.width); // Album orientation
+	shaderProgram_.projectionMatrix = GLKMatrix4MakeOrtho(0, windowSize.width, 0, windowSize.height, -1024, 1024);
+	scene_ = new Scene(windowSize, shaderProgram_);
 
 	[self setupGL];
 }
@@ -88,6 +56,8 @@ typedef struct
 - (void)dealloc
 {    
     [self tearDownGL];
+
+	delete scene_;
     
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];
@@ -144,33 +114,13 @@ typedef struct
 
 	glUseProgram(program_);
 
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, self.textureInfo.name);
-
-	glEnableVertexAttribArray(GLKVertexAttribPosition);
-	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-	
-
-	long offset = (long)&quad_;
-	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, sizeof(TexturedVertex), (void*)(offset + offsetof(TexturedVertex, geometryVertex)));
-	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(TexturedVertex), (void*)(offset + offsetof(TexturedVertex, textureVertex)));
-
-
-	glUniformMatrix4fv(uniformMvpMatrix_, 1, NO, mvpMatrix_.m);
-	glUniform1i(uniformTexture_, 0);
-	glUniform4f(uniformColor_, 1.0, 0.0, 0.0, 1.0);
-
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	scene_->RenderWithModelViewMatrix(GLKMatrix4Identity);
 }
 
 ///
 - (void)update
 {
-    GLKMatrix4 projectionMatrix = GLKMatrix4MakeOrtho(0, self.view.bounds.size.width, 0, self.view.bounds.size.height, -1024, 1024);
-
-	GLKMatrix4 modelViewMatrix = GLKMatrix4Identity;
-	modelViewMatrix = GLKMatrix4Translate(modelViewMatrix, self.view.bounds.size.width/2, self.view.bounds.size.height/2, 0);
-	mvpMatrix_ = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+	scene_->Update(self.timeSinceLastUpdate);
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
@@ -230,9 +180,9 @@ typedef struct
     }
     
     // Get uniform locations.
-    uniformMvpMatrix_ = glGetUniformLocation(program_, "modelViewProjectionMatrix");
-	uniformTexture_ = glGetUniformLocation(program_, "texture");
-	uniformColor_ = glGetUniformLocation(program_, "color");
+    shaderProgram_.uniforms.mvpMatrix = glGetUniformLocation(program_, "modelViewProjectionMatrix");
+	shaderProgram_.uniforms.texSampler = glGetUniformLocation(program_, "texSampler");
+	shaderProgram_.uniforms.color = glGetUniformLocation(program_, "color");
     
     // Release vertex and fragment shaders.
     if (vertShader) {
