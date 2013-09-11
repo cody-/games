@@ -16,7 +16,7 @@ class Scene
 	: public Node
 {
 public:
-	Scene(const CGSize& size, const ShaderProgram& program);
+	Scene(const CGSize& size);
 };
 
 #endif /* defined(__Tetris__Scene__) */

@@ -18,11 +18,10 @@
 class Node
 {
 public:
-	Node(const ShaderProgram& program);
 	GLKVector2 position;
 	CGSize contentSize;
 
-	virtual void RenderWithModelViewMatrix(const GLKMatrix4& matrix);
+	virtual void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix);
 	virtual void Update(float dt);
 	virtual GLKMatrix4 ModelMatrix() const;
 	virtual void HandleTap(const CGPoint& point);
@@ -30,7 +29,6 @@ public:
 	CGRect BoundingBox() const;
 
 protected:
-	const ShaderProgram& program_;
 	std::vector<std::unique_ptr<Node>> children_;
 };
 

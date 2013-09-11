@@ -16,7 +16,7 @@ class GameField
 	: public Node
 {
 public:
-	GameField(const ShaderProgram& program, GLKVector2 position, CGSize size);
+	GameField(GLKVector2 position, CGSize size);
 };
 
 #endif /* defined(__Tetris__GameField__) */

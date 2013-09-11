@@ -12,17 +12,11 @@
 using namespace std;
 
 ///
-Node::Node(const ShaderProgram& program)
-	: program_(program)
+void Node::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
 {
-}
-
-///
-void Node::RenderWithModelViewMatrix(const GLKMatrix4& matrix)
-{
-	GLKMatrix4 childModelViewMatrix = GLKMatrix4Multiply(matrix, ModelMatrix());
+	GLKMatrix4 childModelViewMatrix = GLKMatrix4Multiply(modelViewMatrix, ModelMatrix());
 	for_each(children_.begin(), children_.end(), [&](const unique_ptr<Node>& node) {
-		node->RenderWithModelViewMatrix(childModelViewMatrix);
+		node->Render(program, childModelViewMatrix);
 	});
 }
 

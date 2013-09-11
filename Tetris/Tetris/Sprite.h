@@ -20,8 +20,8 @@ class Sprite
 	: public Node
 {
 public:
-	Sprite(const std::string& fileName, const ShaderProgram& program);
-	void RenderWithModelViewMatrix(const GLKMatrix4& matrix) override;
+	Sprite(const std::string& fileName);
+	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 private:
 	static GLKTextureInfo* LoadTexture(const std::string& fileName);

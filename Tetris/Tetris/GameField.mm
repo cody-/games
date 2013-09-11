@@ -10,13 +10,12 @@
 #include "Sprite.h"
 
 ///
-GameField::GameField(const ShaderProgram& program, GLKVector2 position, CGSize size)
-	: Node(program)
+GameField::GameField(GLKVector2 position, CGSize size)
 {
 	this->position = position;
 	contentSize = size;
 
-	Sprite* sprite = new Sprite("black-square40.png", program_);
+	Sprite* sprite = new Sprite("black-square40.png");
 	sprite->position.x = 0;
 	sprite->position.y = 0;
 

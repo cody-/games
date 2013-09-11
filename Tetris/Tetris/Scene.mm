@@ -10,11 +10,10 @@
 #include "GameField.h"
 
 ///
-Scene::Scene(const CGSize& size, const ShaderProgram& program)
-	: Node(program)
+Scene::Scene(const CGSize& size)
 {
 	contentSize = size;
 
-	GameField* field = new GameField(program_, GLKVector2Make(size.width/4, 0), CGSizeMake(size.width/2, size.height));
+	GameField* field = new GameField(GLKVector2Make(size.width/4, 0), CGSizeMake(size.width/2, size.height));
 	children_.push_back(std::unique_ptr<Node>(field));
 }

@@ -42,7 +42,7 @@
 	//NSLog(@"%f x %f", self.view.bounds.size.width, self.view.bounds.size.height);
 	CGSize windowSize = CGSizeMake(self.view.bounds.size.height, self.view.bounds.size.width); // Album orientation
 	program_->projectionMatrix = GLKMatrix4MakeOrtho(0, windowSize.width, 0, windowSize.height, -1024, 1024);
-	scene_ = new Scene(windowSize, *program_);
+	scene_ = new Scene(windowSize);
 
 	[self setupGL];
 }
@@ -103,7 +103,7 @@
 	glEnable(GL_BLEND);
 
 	program_->Use();
-	scene_->RenderWithModelViewMatrix(GLKMatrix4Identity);
+	scene_->Render(*program_, GLKMatrix4Identity);
 }
 
 ///

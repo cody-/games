@@ -11,9 +11,8 @@
 using namespace std;
 
 ///
-Sprite::Sprite(const string& fileName, const ShaderProgram& program)
-	: Node(program)
-	, textureInfo_(LoadTexture(fileName))
+Sprite::Sprite(const string& fileName)
+	: textureInfo_(LoadTexture(fileName))
 {
 	quad_.bl.geometryVertex = CGPointMake(0, 0);
 	quad_.br.geometryVertex = CGPointMake(textureInfo_.width, 0);
@@ -42,9 +41,9 @@ GLKTextureInfo* Sprite::LoadTexture(const string& fileName)
 }
 
 ///
-void Sprite::RenderWithModelViewMatrix(const GLKMatrix4& matrix)
+void Sprite::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
 {
-	Node::RenderWithModelViewMatrix(matrix);
+	Node::Render(program, modelViewMatrix);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureInfo_.name);
@@ -56,12 +55,12 @@ void Sprite::RenderWithModelViewMatrix(const GLKMatrix4& matrix)
 	glVertexAttribPointer(GLKVertexAttribPosition, 2, GL_FLOAT, GL_FALSE, sizeof(TexturedVertex), (void*)(offset + offsetof(TexturedVertex, geometryVertex)));
 	glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, sizeof(TexturedVertex), (void*)(offset + offsetof(TexturedVertex, textureVertex)));
 
-	GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(matrix, ModelMatrix());
-	GLKMatrix4 mvpMatrix = GLKMatrix4Multiply(program_.projectionMatrix, modelViewMatrix);
+	GLKMatrix4 mvMatrix = GLKMatrix4Multiply(modelViewMatrix, ModelMatrix());
+	GLKMatrix4 mvpMatrix = GLKMatrix4Multiply(program.projectionMatrix, mvMatrix);
 
-	glUniformMatrix4fv(program_.uniforms.mvpMatrix, 1, NO, mvpMatrix.m);
-	glUniform1i(program_.uniforms.texSampler, 0);
-	glUniform4f(program_.uniforms.color, 1.0, 0.0, 0.0, 1.0);
+	glUniformMatrix4fv(program.uniforms.mvpMatrix, 1, NO, mvpMatrix.m);
+	glUniform1i(program.uniforms.texSampler, 0);
+	glUniform4f(program.uniforms.color, 1.0, 0.0, 0.0, 1.0);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }
