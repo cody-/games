@@ -16,7 +16,13 @@ class GameField
 	: public Node
 {
 public:
-	GameField(GLKVector2 position, CGSize size);
+	static unsigned int Width();
+
+	GameField(CGPoint position, CGFloat height);
+
+private:
+	static const unsigned short RIGHT = 11;
+	const unsigned short TOP;
 };
 
 #endif /* defined(__Tetris__GameField__) */

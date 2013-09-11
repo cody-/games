@@ -13,16 +13,15 @@ using namespace std;
 ///
 Sprite::Sprite(const string& fileName)
 	: textureInfo_(LoadTexture(fileName))
+	, quad_(CGSizeMake(textureInfo_.width, textureInfo_.height))
 {
-	quad_.bl.geometryVertex = CGPointMake(0, 0);
-	quad_.br.geometryVertex = CGPointMake(textureInfo_.width, 0);
-	quad_.tl.geometryVertex = CGPointMake(0, textureInfo_.height);
-	quad_.tr.geometryVertex = CGPointMake(textureInfo_.width, textureInfo_.height);
+}
 
-	quad_.bl.textureVertex = CGPointMake(0, 0);
-	quad_.br.textureVertex = CGPointMake(1, 0);
-	quad_.tl.textureVertex = CGPointMake(0, 1);
-	quad_.tr.textureVertex = CGPointMake(1, 1);
+///
+Sprite::Sprite(const string& fileName, CGSize size)
+	: textureInfo_(LoadTexture(fileName))
+	, quad_(size)
+{
 }
 
 ///

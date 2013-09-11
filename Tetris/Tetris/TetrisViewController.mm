@@ -82,7 +82,6 @@
 - (void)setupGL
 {
     [EAGLContext setCurrentContext:self.context];
-    
     program_->LoadShaders();
 }
 

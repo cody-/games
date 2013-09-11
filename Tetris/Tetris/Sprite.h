@@ -21,6 +21,7 @@ class Sprite
 {
 public:
 	Sprite(const std::string& fileName);
+	Sprite(const std::string& fileName, CGSize size);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 private:

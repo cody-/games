@@ -9,14 +9,21 @@
 #ifndef Tetris_TexturedQuad_h
 #define Tetris_TexturedQuad_h
 
+#include <GLKit/GLKit.h>
+
+///
 struct TexturedVertex
 {
 	CGPoint geometryVertex;
 	CGPoint textureVertex;
 };
 
-struct TexturedQuad
+///
+class TexturedQuad
 {
+public:
+	TexturedQuad(CGSize size);
+
 	TexturedVertex bl;
 	TexturedVertex br;
 	TexturedVertex tl;

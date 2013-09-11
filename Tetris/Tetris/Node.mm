@@ -32,7 +32,7 @@ void Node::Update(float dt)
 GLKMatrix4 Node::ModelMatrix() const
 {
 	GLKMatrix4 modelMatrix = GLKMatrix4Identity;
-	return GLKMatrix4Translate(modelMatrix, position.x, position.y, 0);
+	return GLKMatrix4Translate(modelMatrix, position_.x, position_.y, 0);
 }
 
 ///
@@ -44,6 +44,12 @@ void Node::HandleTap(const CGPoint& point)
 ///
 CGRect Node::BoundingBox() const
 {
-	return CGRectMake(position.x, position.y, contentSize.width, contentSize.height);
+	return CGRectMake(position_.x, position_.y, contentSize_.width, contentSize_.height);
+}
+
+///
+void Node::SetPosition(CGPoint point)
+{
+	position_ = point;
 }
 	

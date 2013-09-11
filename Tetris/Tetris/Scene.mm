@@ -12,8 +12,9 @@
 ///
 Scene::Scene(const CGSize& size)
 {
-	contentSize = size;
+	contentSize_ = size;
 
-	GameField* field = new GameField(GLKVector2Make(size.width/4, 0), CGSizeMake(size.width/2, size.height));
+	CGFloat offset = (size.width - GameField::Width())/2;
+	GameField* field = new GameField(CGPointMake(offset, 0), size.height);
 	children_.push_back(std::unique_ptr<Node>(field));
 }

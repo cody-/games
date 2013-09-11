@@ -7,17 +7,35 @@
 //
 
 #include "GameField.h"
-#include "Sprite.h"
+#include "./Border.h"
+#include "Square.h"
+
+using namespace std;
 
 ///
-GameField::GameField(GLKVector2 position, CGSize size)
+unsigned int GameField::Width()
 {
-	this->position = position;
-	contentSize = size;
+	return (RIGHT + 1) * Square::SIDE + 2 * Border::WIDTH;
+}
 
-	Sprite* sprite = new Sprite("black-square40.png");
-	sprite->position.x = 0;
-	sprite->position.y = 0;
+///
+GameField::GameField(CGPoint position, CGFloat height)
+	: TOP(height/Square::SIDE - 1)
+{
+	position_ = {position.x + Border::WIDTH, position.y};
+	contentSize_ = {static_cast<CGFloat>(Width() - 1), height};
 
-	children_.push_back(std::unique_ptr<Node>(sprite));
+	auto lBorder = new Border({-Border::WIDTH, 0}, contentSize_.height);
+	children_.push_back(unique_ptr<Node>(lBorder));
+	auto rBorder = new Border({contentSize_.width, 0}, contentSize_.height);
+	children_.push_back(unique_ptr<Node>(rBorder));
+
+	auto figure = new Square();
+	figure->SetPosition({RIGHT, TOP});
+
+	children_.push_back(std::unique_ptr<Node>(figure));
+
+	auto figure2 = new Square();
+	figure2->SetPosition({0, 0});
+	children_.push_back(unique_ptr<Node>(figure2));
 }
