@@ -1,33 +1,42 @@
 //
-//  Sprite.mm
+//  TexturedNode.mm
 //  Tetris
 //
 //  Created by cody on 9/9/13.
 //  Copyright (c) 2013 local. All rights reserved.
 //
 
-#import "Sprite.h"
+#import "./TexturedNode.h"
 
 using namespace std;
 
 ///
-Sprite::Sprite(const string& fileName)
+TexturedNode::TexturedNode(const string& fileName)
 	: textureInfo_(LoadTexture(fileName))
 	, quad_(CGSizeMake(textureInfo_.width, textureInfo_.height))
+	, texMode_(TextureMode::STRETCH)
 {
 	contentSize_ = CGSizeMake(textureInfo_.width, textureInfo_.height);
 }
 
 ///
-Sprite::Sprite(const string& fileName, CGSize size)
+TexturedNode::TexturedNode(const string& fileName, CGSize size, TextureMode mode)
 	: textureInfo_(LoadTexture(fileName))
 	, quad_(size)
+	, texMode_(mode)
 {
 	contentSize_ = size;
+	if (mode == TextureMode::REPEAT)
+	{
+		quad_.br.textureVertex.x = contentSize_.width/textureInfo_.width;
+		quad_.tl.textureVertex.y = contentSize_.height/textureInfo_.height;
+		quad_.tr.textureVertex.x = contentSize_.width/textureInfo_.width;
+		quad_.tr.textureVertex.y = contentSize_.height/textureInfo_.height;
+	}
 }
 
 ///
-GLKTextureInfo* Sprite::LoadTexture(const string& fileName)
+GLKTextureInfo* TexturedNode::LoadTexture(const string& fileName)
 {
 	NSDictionary* options = @{GLKTextureLoaderOriginBottomLeft: @YES};
 	NSError* error;
@@ -42,12 +51,19 @@ GLKTextureInfo* Sprite::LoadTexture(const string& fileName)
 }
 
 ///
-void Sprite::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
+void TexturedNode::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
 {
-	Node::Render(program, modelViewMatrix);
-
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureInfo_.name);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); 
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	if (texMode_ == TextureMode::REPEAT)
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	}
 
 	glEnableVertexAttribArray(GLKVertexAttribPosition);
 	glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
@@ -63,4 +79,6 @@ void Sprite::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMat
 	glUniform1i(program.uniforms.texSampler, 0);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+
+	Node::Render(program, modelViewMatrix);
 }

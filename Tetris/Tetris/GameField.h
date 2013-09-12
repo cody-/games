@@ -9,21 +9,22 @@
 #ifndef __Tetris__GameField__
 #define __Tetris__GameField__
 
-#include "./Node.h"
+#include "./TexturedNode.h"
 
 ///
 class GameField
-	: public Node
+	: public TexturedNode
 {
 public:
 	static unsigned int Width();
 
 	GameField(CGPoint position, CGFloat height);
+	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 private:
 	void NewFigure();
 
-	static const unsigned short RIGHT = 11;
+	static const unsigned short RIGHT = 12;
 	const unsigned short TOP;
 };
 

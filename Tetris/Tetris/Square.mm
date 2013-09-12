@@ -10,7 +10,7 @@
 
 ///
 Square::Square(UPoint position)
-	: Sprite("black-square40.png", {SIDE, SIDE})
+	: TexturedNode("black-square32.png", {SIDE, SIDE})
 {
 	SetPosition(position);
 }
@@ -18,7 +18,7 @@ Square::Square(UPoint position)
 ///
 void Square::SetPosition(UPoint position)
 {
-	Sprite::SetPosition(CGPointMake(position.x * SIDE, position.y * SIDE));
+	TexturedNode::SetPosition(CGPointMake(position.x * SIDE, position.y * SIDE));
 }
 
 ///
@@ -27,5 +27,5 @@ void Square::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMat
 	glUniform1i(program.uniforms.useColor, 1);
 	glUniform4f(program.uniforms.color, 1.0, 0.0, 0.0, 1.0);
 
-	Sprite::Render(program, modelViewMatrix);
+	TexturedNode::Render(program, modelViewMatrix);
 }

@@ -9,12 +9,12 @@
 #ifndef __Tetris__Button__
 #define __Tetris__Button__
 
-#include "./Sprite.h"
+#include "./TexturedNode.h"
 #include <functional>
 
 ///
 class Button
-	: public Sprite
+	: public TexturedNode
 {
 public:
 	Button(const std::string& img, CGFloat radius, CGPoint position, std::function<void()> action);

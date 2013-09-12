@@ -12,7 +12,7 @@ using namespace std;
 
 ///
 Button::Button(const string& img, CGFloat radius, CGPoint position, function<void()> action)
-	: Sprite(img, CGSizeMake(2*radius, 2*radius))
+	: TexturedNode(img, CGSizeMake(2*radius, 2*radius))
 	, action_(action)
 {
 	position_ = position;
@@ -23,7 +23,7 @@ void Button::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMat
 {
 	glUniform1i(program.uniforms.useColor, 0);
 
-	Sprite::Render(program, modelViewMatrix);
+	TexturedNode::Render(program, modelViewMatrix);
 }
 
 ///

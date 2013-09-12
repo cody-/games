@@ -24,7 +24,7 @@
 		C3806B9C17D9C64200207C36 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C3806B9917D9BD5300207C36 /* Shader.fsh */; };
 		C3806BA817DB0E5300207C36 /* black-square40.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BA617DB0E5300207C36 /* black-square40.png */; };
 		C3806BB317DE1C5000207C36 /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB217DE1C5000207C36 /* Node.mm */; };
-		C3806BB617DE201800207C36 /* Sprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB517DE201800207C36 /* Sprite.mm */; };
+		C3806BB617DE201800207C36 /* TexturedNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB517DE201800207C36 /* TexturedNode.mm */; };
 		C3806BBB17DE2AA300207C36 /* Scene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB917DE2AA200207C36 /* Scene.mm */; };
 		C3806BBD17DF679000207C36 /* ShaderProgram.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BBC17DF678F00207C36 /* ShaderProgram.mm */; };
 		C3806BC017DF73D000207C36 /* GameField.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BBE17DF73CF00207C36 /* GameField.mm */; };
@@ -37,6 +37,9 @@
 		C3806BEA17E18E4F00207C36 /* arrow right.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BE617E18E4F00207C36 /* arrow right.png */; };
 		C3806BEB17E18E4F00207C36 /* rotate.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BE717E18E4F00207C36 /* rotate.png */; };
 		C3806BEE17E18E8800207C36 /* Button.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BEC17E18E8500207C36 /* Button.mm */; };
+		C3806BF317E1C22600207C36 /* bg-abstract.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3806BF117E1C22600207C36 /* bg-abstract.jpg */; };
+		C3806BF417E1C22600207C36 /* bg-tech.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3806BF217E1C22600207C36 /* bg-tech.jpg */; };
+		C3806BF617E1DBE600207C36 /* black-square32.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BF517E1DBE500207C36 /* black-square32.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,8 +68,8 @@
 		C3806BAA17DB11C300207C36 /* black-square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square.png"; path = "Tetris/black-square.png"; sourceTree = "<group>"; };
 		C3806BB117DE1C4F00207C36 /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		C3806BB217DE1C5000207C36 /* Node.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Node.mm; sourceTree = "<group>"; };
-		C3806BB417DE201800207C36 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
-		C3806BB517DE201800207C36 /* Sprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Sprite.mm; sourceTree = "<group>"; };
+		C3806BB417DE201800207C36 /* TexturedNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexturedNode.h; sourceTree = "<group>"; };
+		C3806BB517DE201800207C36 /* TexturedNode.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TexturedNode.mm; sourceTree = "<group>"; };
 		C3806BB717DE211700207C36 /* TexturedQuad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TexturedQuad.h; sourceTree = "<group>"; };
 		C3806BB817DE261000207C36 /* ShaderProgram.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderProgram.h; sourceTree = "<group>"; };
 		C3806BB917DE2AA200207C36 /* Scene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Scene.mm; sourceTree = "<group>"; };
@@ -88,6 +91,9 @@
 		C3806BE717E18E4F00207C36 /* rotate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rotate.png; path = Tetris/rotate.png; sourceTree = "<group>"; };
 		C3806BEC17E18E8500207C36 /* Button.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Button.mm; sourceTree = "<group>"; };
 		C3806BED17E18E8700207C36 /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
+		C3806BF117E1C22600207C36 /* bg-abstract.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "bg-abstract.jpg"; path = "Tetris/bg-abstract.jpg"; sourceTree = "<group>"; };
+		C3806BF217E1C22600207C36 /* bg-tech.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "bg-tech.jpg"; path = "Tetris/bg-tech.jpg"; sourceTree = "<group>"; };
+		C3806BF517E1DBE500207C36 /* black-square32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square32.png"; path = "Tetris/black-square32.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,12 +159,12 @@
 				C3806BBC17DF678F00207C36 /* ShaderProgram.mm */,
 				C3806BB117DE1C4F00207C36 /* Node.h */,
 				C3806BB217DE1C5000207C36 /* Node.mm */,
+				C3806BB417DE201800207C36 /* TexturedNode.h */,
+				C3806BB517DE201800207C36 /* TexturedNode.mm */,
 				C3806BBA17DE2AA300207C36 /* Scene.h */,
 				C3806BB917DE2AA200207C36 /* Scene.mm */,
 				C3806BBF17DF73D000207C36 /* GameField.h */,
 				C3806BBE17DF73CF00207C36 /* GameField.mm */,
-				C3806BB417DE201800207C36 /* Sprite.h */,
-				C3806BB517DE201800207C36 /* Sprite.mm */,
 				C3806BC217E03AAB00207C36 /* Square.h */,
 				C3806BC117E03AAB00207C36 /* Square.mm */,
 				C3806BC717E0485300207C36 /* Types.h */,
@@ -189,6 +195,9 @@
 		C3806BA517DB0E3700207C36 /* rsrc */ = {
 			isa = PBXGroup;
 			children = (
+				C3806BF517E1DBE500207C36 /* black-square32.png */,
+				C3806BF117E1C22600207C36 /* bg-abstract.jpg */,
+				C3806BF217E1C22600207C36 /* bg-tech.jpg */,
 				C3806BE417E18E4F00207C36 /* arrow down.png */,
 				C3806BE517E18E4F00207C36 /* arrow left.png */,
 				C3806BE617E18E4F00207C36 /* arrow right.png */,
@@ -263,6 +272,9 @@
 				C3806BE917E18E4F00207C36 /* arrow left.png in Resources */,
 				C3806BEA17E18E4F00207C36 /* arrow right.png in Resources */,
 				C3806BEB17E18E4F00207C36 /* rotate.png in Resources */,
+				C3806BF317E1C22600207C36 /* bg-abstract.jpg in Resources */,
+				C3806BF417E1C22600207C36 /* bg-tech.jpg in Resources */,
+				C3806BF617E1DBE600207C36 /* black-square32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +289,7 @@
 				C3806B4B17D8E67800207C36 /* AppDelegate.m in Sources */,
 				C3806B5D17D8E71700207C36 /* TetrisViewController.mm in Sources */,
 				C3806BB317DE1C5000207C36 /* Node.mm in Sources */,
-				C3806BB617DE201800207C36 /* Sprite.mm in Sources */,
+				C3806BB617DE201800207C36 /* TexturedNode.mm in Sources */,
 				C3806BBB17DE2AA300207C36 /* Scene.mm in Sources */,
 				C3806BBD17DF679000207C36 /* ShaderProgram.mm in Sources */,
 				C3806BC017DF73D000207C36 /* GameField.mm in Sources */,

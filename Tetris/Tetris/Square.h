@@ -9,15 +9,15 @@
 #ifndef __Tetris__Square__
 #define __Tetris__Square__
 
-#include "./Sprite.h"
+#include "./TexturedNode.h"
 #include "./Types.h"
 
 ///
 class Square
-	: public Sprite
+	: public TexturedNode
 {
 public:
-	static const unsigned short SIDE = 40;
+	static const unsigned short SIDE = 32;
 	Square(UPoint position);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 

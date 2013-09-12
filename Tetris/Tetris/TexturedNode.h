@@ -1,13 +1,13 @@
 //
-//  Sprite.h
+//  TexturedNode.h
 //  Tetris
 //
 //  Created by cody on 9/9/13.
 //  Copyright (c) 2013 local. All rights reserved.
 //
 
-#ifndef __Tetris__Sprite__
-#define __Tetris__Sprite__
+#ifndef __Tetris__TexturedNode__
+#define __Tetris__TexturedNode__
 
 #import "./Node.h"
 #include "./TexturedQuad.h"
@@ -15,20 +15,26 @@
 
 #import <GLKit/GLKit.h>
 
+enum class TextureMode {
+	STRETCH,
+	REPEAT
+};
+
 ///
-class Sprite
+class TexturedNode
 	: public Node
 {
 public:
-	Sprite(const std::string& fileName);
-	Sprite(const std::string& fileName, CGSize size);
+	TexturedNode(const std::string& fileName);
+	TexturedNode(const std::string& fileName, CGSize size, TextureMode mode = TextureMode::STRETCH);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
-private:
+protected:
 	static GLKTextureInfo* LoadTexture(const std::string& fileName);
 
 	GLKTextureInfo* textureInfo_;
 	TexturedQuad quad_;
+	TextureMode texMode_;
 };
 
 #endif

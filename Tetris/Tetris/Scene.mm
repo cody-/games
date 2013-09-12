@@ -14,16 +14,17 @@ using namespace std;
 
 ///
 Scene::Scene(const CGSize& size)
+	: TexturedNode("bg-tech.jpg", size)
 {
 	contentSize_ = size;
-
-	CGFloat offset = (size.width - GameField::Width())/2;
-	GameField* field = new GameField(CGPointMake(offset, 0), size.height);
-	children_.push_back(unique_ptr<Node>(field));
 
 	CGFloat btnY = size.height*2/3;
 	CGFloat btnOffsetX = 30;
 	CGFloat btnRadius = 40;
+
+	CGFloat offset = 3*btnOffsetX + 4*btnRadius;
+	GameField* field = new GameField(CGPointMake(offset, 0), size.height);
+	children_.push_back(unique_ptr<Node>(field));
 	
 	children_.push_back(unique_ptr<Node>(new Button("rotate.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), btnY}, [&]{ Rotate(); })));
 	children_.push_back(unique_ptr<Node>(new Button("arrow left.png", btnRadius, {btnOffsetX, btnY}, [&]{ MoveLeft(); })));

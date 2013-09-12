@@ -9,11 +9,11 @@
 #ifndef __Tetris__Scene__
 #define __Tetris__Scene__
 
-#import "./Node.h"
+#import "./TexturedNode.h"
 
 ///
 class Scene
-	: public Node
+	: public TexturedNode
 {
 public:
 	Scene(const CGSize& size);
