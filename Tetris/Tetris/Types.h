@@ -21,6 +21,14 @@ struct Point
 };
 
 ///
+template <class T>
+struct Size
+{
+	T w;
+	T h;
+};
+
+///
 struct Line
 {
 	CGPoint p1;
@@ -28,5 +36,8 @@ struct Line
 };
 
 } // namespace
+
+using UPoint = Game::Point<unsigned int>;
+using USize = Game::Size<unsigned int>;
 
 #endif

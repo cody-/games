@@ -17,6 +17,7 @@ struct Uniforms
 	GLint mvpMatrix;
 	GLint texSampler;
 	GLint color;
+	GLboolean useColor;
 };
 
 ///

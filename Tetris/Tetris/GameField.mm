@@ -8,7 +8,8 @@
 
 #include "GameField.h"
 #include "./Border.h"
-#include "Square.h"
+#include "./Figure.h"
+#include "./Square.h"
 
 using namespace std;
 
@@ -30,12 +31,12 @@ GameField::GameField(CGPoint position, CGFloat height)
 	auto rBorder = new Border({contentSize_.width, 0}, contentSize_.height);
 	children_.push_back(unique_ptr<Node>(rBorder));
 
-	auto figure = new Square();
-	figure->SetPosition({RIGHT, TOP});
+	NewFigure();
+}
 
+///
+void GameField::NewFigure()
+{
+	auto figure = new Figure({RIGHT/2, TOP});
 	children_.push_back(std::unique_ptr<Node>(figure));
-
-	auto figure2 = new Square();
-	figure2->SetPosition({0, 0});
-	children_.push_back(unique_ptr<Node>(figure2));
 }

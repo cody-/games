@@ -17,6 +17,13 @@ class Scene
 {
 public:
 	Scene(const CGSize& size);
+	bool HandleTap(const CGPoint& point) override;
+
+private:
+	void MoveLeft();
+	void MoveRight();
+	void MoveDown();
+	void Rotate();
 };
 
 #endif /* defined(__Tetris__Scene__) */

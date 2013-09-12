@@ -21,7 +21,7 @@ public:
 	virtual void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix);
 	virtual void Update(float dt);
 	virtual GLKMatrix4 ModelMatrix() const;
-	virtual void HandleTap(const CGPoint& point);
+	virtual bool HandleTap(const CGPoint& point);
 	virtual void SetPosition(CGPoint point);
 	
 	CGRect BoundingBox() const;

@@ -21,6 +21,8 @@ public:
 	GameField(CGPoint position, CGFloat height);
 
 private:
+	void NewFigure();
+
 	static const unsigned short RIGHT = 11;
 	const unsigned short TOP;
 };

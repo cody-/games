@@ -15,6 +15,7 @@ Sprite::Sprite(const string& fileName)
 	: textureInfo_(LoadTexture(fileName))
 	, quad_(CGSizeMake(textureInfo_.width, textureInfo_.height))
 {
+	contentSize_ = CGSizeMake(textureInfo_.width, textureInfo_.height);
 }
 
 ///
@@ -22,6 +23,7 @@ Sprite::Sprite(const string& fileName, CGSize size)
 	: textureInfo_(LoadTexture(fileName))
 	, quad_(size)
 {
+	contentSize_ = size;
 }
 
 ///
@@ -59,7 +61,6 @@ void Sprite::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMat
 
 	glUniformMatrix4fv(program.uniforms.mvpMatrix, 1, NO, mvpMatrix.m);
 	glUniform1i(program.uniforms.texSampler, 0);
-	glUniform4f(program.uniforms.color, 1.0, 0.0, 0.0, 1.0);
 
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 }

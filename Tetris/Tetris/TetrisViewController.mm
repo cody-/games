@@ -44,7 +44,27 @@
 	program_->projectionMatrix = GLKMatrix4MakeOrtho(0, windowSize.width, 0, windowSize.height, -1024, 1024);
 	scene_ = new Scene(windowSize);
 
+	// Tap recognizer
+	UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
+	[self.view addGestureRecognizer:tapRecognizer];
+
 	[self setupGL];
+}
+
+///
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+	return UIInterfaceOrientationIsLandscape(toInterfaceOrientation);
+}
+
+///
+- (void)handleTapFrom:(UITapGestureRecognizer*)recognizer
+{
+	// Flip touch point (iPad coord system -> OpenGL coord system)
+	CGPoint touchLocation = [recognizer locationInView:recognizer.view];
+	touchLocation = CGPointMake(touchLocation.x, 768 - touchLocation.y);
+
+	scene_->HandleTap(touchLocation);
 }
 
 ///

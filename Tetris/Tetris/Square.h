@@ -18,8 +18,11 @@ class Square
 {
 public:
 	static const unsigned short SIDE = 40;
-	Square();
-	void SetPosition(Game::Point<unsigned short> position);
+	Square(UPoint position);
+	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
+
+private:
+	void SetPosition(UPoint position);
 };
 
 #endif /* defined(__Tetris__Square__) */

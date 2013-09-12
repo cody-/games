@@ -35,10 +35,10 @@ GLKMatrix4 Node::ModelMatrix() const
 	return GLKMatrix4Translate(modelMatrix, position_.x, position_.y, 0);
 }
 
-///
-void Node::HandleTap(const CGPoint& point)
+/// @return true if this object will handle the tap, false if not
+bool Node::HandleTap(const CGPoint& point)
 {
-
+	return false;
 }
 
 ///

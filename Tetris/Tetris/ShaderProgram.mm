@@ -89,6 +89,7 @@ bool ShaderProgram::LoadShaders()
     uniforms.mvpMatrix = glGetUniformLocation(handle, "modelViewProjectionMatrix");
 	uniforms.texSampler = glGetUniformLocation(handle, "texSampler");
 	uniforms.color = glGetUniformLocation(handle, "color");
+	uniforms.useColor = glGetUniformLocation(handle, "useColor");
     
     // Release vertex and fragment shaders.
     if (vertShader) {

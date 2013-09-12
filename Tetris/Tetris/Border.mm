@@ -33,7 +33,7 @@ void Border::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMat
 	GLKMatrix4 mvpMatrix = GLKMatrix4Multiply(program.projectionMatrix, mvMatrix);
 
 	glUniformMatrix4fv(program.uniforms.mvpMatrix, 1, NO, mvpMatrix.m);
-	glUniform4f(program.uniforms.color, 0.0, 0.0, 0.0, 1.0);
+	glUniform4f(program.uniforms.color, 0.5, 0.5, 0.5, 1.0);
 
 	glDrawArrays(GL_LINES, 0, 2);
 }
