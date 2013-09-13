@@ -15,7 +15,7 @@ Button::Button(const string& img, CGFloat radius, CGPoint position, function<voi
 	: TexturedNode(img, CGSizeMake(2*radius, 2*radius))
 	, action_(action)
 {
-	position_ = position;
+	SetPosition(position);
 }
 
 ///

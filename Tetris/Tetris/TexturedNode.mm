@@ -7,12 +7,13 @@
 //
 
 #import "./TexturedNode.h"
+#include "./TextureLoader.h"
 
 using namespace std;
 
 ///
 TexturedNode::TexturedNode(const string& fileName)
-	: textureInfo_(LoadTexture(fileName))
+	: textureInfo_(TextureLoader::Instance()->GetTexture(fileName))
 	, quad_(CGSizeMake(textureInfo_.width, textureInfo_.height))
 	, texMode_(TextureMode::STRETCH)
 {
@@ -21,7 +22,7 @@ TexturedNode::TexturedNode(const string& fileName)
 
 ///
 TexturedNode::TexturedNode(const string& fileName, CGSize size, TextureMode mode)
-	: textureInfo_(LoadTexture(fileName))
+	: textureInfo_(TextureLoader::Instance()->GetTexture(fileName))
 	, quad_(size)
 	, texMode_(mode)
 {
@@ -33,21 +34,6 @@ TexturedNode::TexturedNode(const string& fileName, CGSize size, TextureMode mode
 		quad_.tr.textureVertex.x = contentSize_.width/textureInfo_.width;
 		quad_.tr.textureVertex.y = contentSize_.height/textureInfo_.height;
 	}
-}
-
-///
-GLKTextureInfo* TexturedNode::LoadTexture(const string& fileName)
-{
-	NSDictionary* options = @{GLKTextureLoaderOriginBottomLeft: @YES};
-	NSError* error;
-	GLKTextureInfo* textureInfo = [GLKTextureLoader textureWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[NSString stringWithUTF8String:fileName.c_str()] ofType:nil] options:options error:&error];
-	if (textureInfo == nil)
-	{
-		NSLog(@"Error loading file: %@", [error localizedDescription]);
-		throw "Can't load texture";
-	}
-
-	return textureInfo;
 }
 
 ///

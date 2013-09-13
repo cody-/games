@@ -10,6 +10,8 @@
 #define __Tetris__Scene__
 
 #import "./TexturedNode.h"
+#include "./GameField.h"
+#include <memory>
 
 ///
 class Scene
@@ -20,10 +22,7 @@ public:
 	bool HandleTap(const CGPoint& point) override;
 
 private:
-	void MoveLeft();
-	void MoveRight();
-	void MoveDown();
-	void Rotate();
+	std::shared_ptr<GameField> gameField_;
 };
 
 #endif /* defined(__Tetris__Scene__) */

@@ -10,9 +10,9 @@
 
 ///
 Border::Border(CGPoint position, CGFloat height)
-	: line_({position_, {position_.x, position_.y + height}})
+	: line_({position, {position.x, position.y + height}})
 {
-	position_ = position;
+	SetPosition(position);
 	contentSize_ = CGSizeMake(WIDTH, height);
 }
 
@@ -34,6 +34,7 @@ void Border::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMat
 
 	glUniformMatrix4fv(program.uniforms.mvpMatrix, 1, NO, mvpMatrix.m);
 	glUniform4f(program.uniforms.color, 0.5, 0.5, 0.5, 1.0);
+	glUniform1i(program.uniforms.useColor, 1);
 
 	glDrawArrays(GL_LINES, 0, 2);
 }

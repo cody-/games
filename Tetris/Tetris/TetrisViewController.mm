@@ -9,6 +9,7 @@
 #import "TetrisViewController.h"
 #import "ShaderProgram.h"
 #import "Scene.h"
+#include "./TextureLoader.h"
 
 @interface TetrisViewController()
 {
@@ -73,6 +74,7 @@
     [self tearDownGL];
 
 	delete scene_;
+	TextureLoader::RemoveInstance();
     
     if ([EAGLContext currentContext] == self.context) {
         [EAGLContext setCurrentContext:nil];

@@ -15,7 +15,7 @@ using namespace std;
 void Node::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
 {
 	GLKMatrix4 childModelViewMatrix = GLKMatrix4Multiply(modelViewMatrix, ModelMatrix());
-	for_each(children_.begin(), children_.end(), [&](const unique_ptr<Node>& node) {
+	for_each(children_.begin(), children_.end(), [&](const shared_ptr<Node>& node) {
 		node->Render(program, childModelViewMatrix);
 	});
 }
@@ -23,7 +23,7 @@ void Node::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatri
 ///
 void Node::Update(float dt)
 {
-	for_each(children_.begin(), children_.end(), [&](const unique_ptr<Node>& node) {
+	for_each(children_.begin(), children_.end(), [&](const shared_ptr<Node>& node) {
 		node->Update(dt);
 	});
 }

@@ -27,9 +27,11 @@ public:
 	CGRect BoundingBox() const;
 
 protected:
-	CGPoint position_;
 	CGSize contentSize_;
-	std::vector<std::unique_ptr<Node>> children_;
+	std::vector<std::shared_ptr<Node>> children_;
+
+private:
+	CGPoint position_;
 };
 
 #endif

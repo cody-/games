@@ -23,13 +23,13 @@ Scene::Scene(const CGSize& size)
 	CGFloat btnRadius = 40;
 
 	CGFloat offset = 3*btnOffsetX + 4*btnRadius;
-	GameField* field = new GameField(CGPointMake(offset, 0), size.height);
-	children_.push_back(unique_ptr<Node>(field));
+	gameField_ = shared_ptr<GameField>(new GameField(CGPointMake(offset, 0), size.height));
+	children_.push_back(gameField_);
 	
-	children_.push_back(unique_ptr<Node>(new Button("rotate.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), btnY}, [&]{ Rotate(); })));
-	children_.push_back(unique_ptr<Node>(new Button("arrow left.png", btnRadius, {btnOffsetX, btnY}, [&]{ MoveLeft(); })));
-	children_.push_back(unique_ptr<Node>(new Button("arrow right.png", btnRadius, {2*btnOffsetX + 2*btnRadius, btnY}, [&]{ MoveRight(); })));
-	children_.push_back(unique_ptr<Node>(new Button("arrow down.png", btnRadius, {btnOffsetX*1.5f + btnRadius, btnY - 2*btnRadius}, [&]{ MoveDown(); })));
+	children_.push_back(unique_ptr<Node>(new Button("rotate.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), btnY}, [&]{ gameField_->Rotate(); })));
+	children_.push_back(unique_ptr<Node>(new Button("arrow left.png", btnRadius, {btnOffsetX, btnY}, [&]{ gameField_->MoveLeft(); })));
+	children_.push_back(unique_ptr<Node>(new Button("arrow right.png", btnRadius, {2*btnOffsetX + 2*btnRadius, btnY}, [&]{ gameField_->MoveRight(); })));
+	children_.push_back(unique_ptr<Node>(new Button("arrow down.png", btnRadius, {btnOffsetX*1.5f + btnRadius, btnY - 2*btnRadius}, [&]{ gameField_->MoveDown(); })));
 }
 
 ///
@@ -42,28 +42,4 @@ bool Scene::HandleTap(const CGPoint& point)
 	}
 
 	return true;
-}
-
-///
-void Scene::MoveLeft()
-{
-	NSLog(@"Move left");
-}
-
-///
-void Scene::MoveRight()
-{
-	NSLog(@"Move right");
-}
-
-///
-void Scene::MoveDown()
-{
-	NSLog(@"Move down");
-}
-
-///
-void Scene::Rotate()
-{
-	NSLog(@"Rotate");
 }

@@ -12,11 +12,11 @@
 Square::Square(UPoint position)
 	: TexturedNode("black-square32.png", {SIDE, SIDE})
 {
-	SetPosition(position);
+	SetGridPosition(position);
 }
 
 ///
-void Square::SetPosition(UPoint position)
+void Square::SetGridPosition(UPoint position)
 {
 	TexturedNode::SetPosition(CGPointMake(position.x * SIDE, position.y * SIDE));
 }

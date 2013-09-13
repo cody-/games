@@ -30,8 +30,6 @@ public:
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 protected:
-	static GLKTextureInfo* LoadTexture(const std::string& fileName);
-
 	GLKTextureInfo* textureInfo_;
 	TexturedQuad quad_;
 	TextureMode texMode_;

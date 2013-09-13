@@ -22,7 +22,7 @@ public:
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 private:
-	void SetPosition(UPoint position);
+	void SetGridPosition(UPoint position);
 };
 
 #endif /* defined(__Tetris__Square__) */
