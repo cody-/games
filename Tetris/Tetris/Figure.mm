@@ -14,7 +14,7 @@ using namespace std;
 
 namespace
 {
-	const vector<Figure::BaseMatrix> figures = {
+	const vector<vector<vector<bool>>> figures = {
 		{{1, 1, 0},
 		 {0, 1, 1}},
 
@@ -27,24 +27,18 @@ namespace
 }
 
 ///
-constexpr USize FigureSize(const Figure::BaseMatrix& figure)
-{
-	return {figure[0].size(), figure.size()};
-}
-
-///
 Figure::Figure(GridPoint topCenter)
 {
 	const size_t f = 0; // TODO(cody): choose randomly
 	SetBaseMatrix(figures[f]);
-	SetGridPosition({topCenter.x - static_cast<int>(size_.w)/2, topCenter.y - (static_cast<int>(size_.h) - 1)});
+	SetGridPosition({topCenter.x - static_cast<int>(Size().w)/2, topCenter.y - (static_cast<int>(Size().h) - 1)});
 }
 
 ///
 Figure::Figure(GridPoint position, USize size)
 {
 	SetGridPosition(position);
-	SetBaseMatrix(Figure::BaseMatrix(size.h, vector<bool>(size.w, false)));
+	SetBaseMatrix(size);
 }
 
 ///
@@ -75,36 +69,26 @@ void Figure::MoveDown(PositionValidator validator)
 ///
 void Figure::Rotate(PositionSizeValidator validator)
 {
-	BaseMatrix newBase(size_.w);
-	for (size_t i = 0; i < size_.w; ++i)
-	{
-		newBase[i] = vector<bool>(size_.h);
-		for (size_t j = 0; j < size_.h; ++j)
-		{
-			const size_t jOpposite = size_.h - 1 - j; // we don't want a "diagonal reflection", but rotation ("diagonal reflection" and then "vertical reflection")
-			newBase[i][j] = baseMatrix_[jOpposite][i];
-		}
-	}
+	FigureBaseMatrix newBase({Size().h, Size().w});
+	for (size_t i = 0; i < Size().w; ++i)
+		for (size_t j = 0; j < Size().h; ++j)
+			newBase[j][i] = baseMatrix_[i][newBase.Size().w - 1 - j];
 
-	const USize newSize = FigureSize(newBase);
-	if (validator(gridPosition_, newSize))
-		SetBaseMatrix(newBase, &newSize);
+	if (validator(gridPosition_, newBase.Size()))
+		SetBaseMatrix(move(newBase));
 }
 
 ///
-void Figure::SetBaseMatrix(BaseMatrix m, const USize* pSize)
+void Figure::SetBaseMatrix(FigureBaseMatrix m)
 {
 	baseMatrix_ = move(m);
-	SetGridSize(pSize ? *pSize : FigureSize(baseMatrix_));
+	UpdateViewSize();
 	
 	children_.clear();
-	for (size_t i = 0; i < size_.w; ++i)
-		for (size_t j = 0; j < size_.h; ++j)
-			if (baseMatrix_[j][i])
-			{
-				const size_t jOpposite = size_.h - 1 - j; // iteration through matrix is top->down, while position increases down->top
-				children_.push_back(shared_ptr<Node>(new Square({i, jOpposite})));
-			}
+	for (size_t i = 0; i < Size().w; ++i)
+		for (size_t j = 0; j < Size().h; ++j)
+			if (baseMatrix_[i][j])
+				children_.push_back(shared_ptr<Node>(new Square({i, j})));
 }
 
 ///
@@ -115,26 +99,25 @@ void Figure::SetGridPosition(GridPoint position)
 }
 
 ///
-void Figure::SetGridSize(USize size)
+void Figure::UpdateViewSize()
 {
-	size_ = move(size);
-	contentSize_ = CGSizeMake(size_.w * Square::SIDE, size_.h * Square::SIDE);
+	contentSize_ = CGSizeMake(Size().w * Square::SIDE, Size().h * Square::SIDE);
 }
 
 ///
 bool Figure::CollidesWith(const Figure& rhs, const GridPoint& rhsPosition) const
 {
 	UPoint relativePosition = {static_cast<unsigned int>(rhsPosition.x - gridPosition_.x), static_cast<unsigned int>(rhsPosition.y - gridPosition_.y)};
-	if (relativePosition.x >= size_.w || relativePosition.y >= size_.h)
+	if (relativePosition.x >= Size().w || relativePosition.y >= Size().h)
 		return false;
 
-	for (size_t i = 0; i < rhs.size_.w; ++i)
-		for (size_t j = 0; j < rhs.size_.h; ++j)
-			if (rhs.baseMatrix_[j][i])
+	for (size_t i = 0; i < rhs.Size().w; ++i)
+		for (size_t j = 0; j < rhs.Size().h; ++j)
+			if (rhs.baseMatrix_[i][j])
 			{
 				size_t relI = relativePosition.x + i;
 				size_t relJ = relativePosition.y + j;
-				if (relI < size_.w && relJ < size_.h && baseMatrix_[relJ][relI])
+				if (relI < Size().w && relJ < Size().h && baseMatrix_[relI][relJ])
 					return true;
 			}
 			
@@ -145,24 +128,24 @@ bool Figure::CollidesWith(const Figure& rhs, const GridPoint& rhsPosition) const
 void Figure::operator+=(const Figure& rhs)
 {
 	UPoint relativePosition = {static_cast<unsigned int>(rhs.gridPosition_.x - gridPosition_.x), static_cast<unsigned int>(rhs.gridPosition_.y - gridPosition_.y)};
-	USize newSize = {max(relativePosition.x + rhs.size_.w, size_.w), max(relativePosition.y + rhs.size_.h, size_.h)};
-	Figure::BaseMatrix newBase(newSize.h, vector<bool>(newSize.w, false));
-	for (size_t i = 0; i < size_.w; ++i)
-		for (size_t j = 0; j < size_.h; ++j)
-			newBase[newSize.h - size_.h + j][i] = baseMatrix_[j][i];
+	USize newSize = {max(relativePosition.x + rhs.Size().w, Size().w), max(relativePosition.y + rhs.Size().h, Size().h)};
+	FigureBaseMatrix newBase(newSize);
+	for (size_t i = 0; i < Size().w; ++i)
+		for (size_t j = 0; j < Size().h; ++j)
+			newBase[i][j] = baseMatrix_[i][j];
 
-	for (size_t i = 0; i < rhs.size_.w; ++i)
-		for (size_t j = 0; j < rhs.size_.h; ++j)
+	for (size_t i = 0; i < rhs.Size().w; ++i)
+		for (size_t j = 0; j < rhs.Size().h; ++j)
 		{
-			size_t newI = relativePosition.x + i;
-			newBase[j][newI] = rhs.baseMatrix_[j][i];
-			if (newBase[j][newI])
+			size_t relI = relativePosition.x + i;
+			size_t relJ = relativePosition.y + j;
+			newBase[relI][relJ] = rhs.baseMatrix_[i][j];
+			if (newBase[relI][relJ])
 			{
-				const size_t jOpposite = newSize.h - 1 - j; // iteration through matrix is top->down, while position increases down->top
-				children_.push_back(shared_ptr<Node>(new Square({newI, jOpposite})));
+				children_.push_back(shared_ptr<Node>(new Square({relI, relJ})));
 			}
 		}
 
 	baseMatrix_ = newBase;
-	SetGridSize(newSize);
+	UpdateViewSize();
 }

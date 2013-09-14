@@ -11,6 +11,7 @@
 
 #include "./Node.h"
 #include "./Types.h"
+#include "./FigureBaseMatrix.h"
 #include <functional>
 #include <vector>
 
@@ -21,12 +22,11 @@ class Figure
 public:
 	Figure(GridPoint topCenter);
 	Figure(GridPoint position, USize size); // zero constructor
-	USize Size() const { return size_; };
+	USize Size() const { return baseMatrix_.Size(); };
 	GridPoint Position() const { return gridPosition_; }
 
 	using PositionValidator = std::function<bool(const GridPoint&)>;
 	using PositionSizeValidator = std::function<bool(const GridPoint&, const USize&)>;
-	using BaseMatrix = std::vector<std::vector<bool>>;
 	
 	void MoveLeft(PositionValidator validator);
 	void MoveRight(PositionValidator validator);
@@ -37,14 +37,13 @@ public:
 	void operator+=(const Figure& rhs); // Requirement rhs must be to the top right from the current figure
 
 private:
-	void SetBaseMatrix(BaseMatrix m, const USize* pSize = nullptr);
+	void SetBaseMatrix(FigureBaseMatrix m);
 	void SetGridPosition(GridPoint position);
-	void SetGridSize(USize size);
+	void UpdateViewSize();
 	void MoveTo(GridPoint newPosition, PositionValidator validator);
 
 	GridPoint gridPosition_;
-	USize size_;
-	BaseMatrix baseMatrix_;
+	FigureBaseMatrix baseMatrix_;
 };
 
 #endif /* defined(__Tetris__Figure__) */

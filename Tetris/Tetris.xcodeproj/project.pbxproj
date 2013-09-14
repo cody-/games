@@ -41,6 +41,7 @@
 		C3806BF417E1C22600207C36 /* bg-tech.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C3806BF217E1C22600207C36 /* bg-tech.jpg */; };
 		C3806BF617E1DBE600207C36 /* black-square32.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BF517E1DBE500207C36 /* black-square32.png */; };
 		C3806BFC17E2F84600207C36 /* TextureLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BFA17E2F84200207C36 /* TextureLoader.mm */; };
+		C38B0A9817E47E0B006B1003 /* FigureBaseMatrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = C38B0A9617E47E0B006B1003 /* FigureBaseMatrix.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -97,6 +98,8 @@
 		C3806BF517E1DBE500207C36 /* black-square32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "black-square32.png"; path = "Tetris/black-square32.png"; sourceTree = "<group>"; };
 		C3806BFA17E2F84200207C36 /* TextureLoader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TextureLoader.mm; sourceTree = "<group>"; };
 		C3806BFB17E2F84400207C36 /* TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureLoader.h; sourceTree = "<group>"; };
+		C38B0A9617E47E0B006B1003 /* FigureBaseMatrix.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FigureBaseMatrix.mm; sourceTree = "<group>"; };
+		C38B0A9717E47E0B006B1003 /* FigureBaseMatrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureBaseMatrix.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +182,8 @@
 				C3806BEC17E18E8500207C36 /* Button.mm */,
 				C3806BFB17E2F84400207C36 /* TextureLoader.h */,
 				C3806BFA17E2F84200207C36 /* TextureLoader.mm */,
+				C38B0A9617E47E0B006B1003 /* FigureBaseMatrix.mm */,
+				C38B0A9717E47E0B006B1003 /* FigureBaseMatrix.h */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				C3806BD317E0BF6000207C36 /* Figure.mm in Sources */,
 				C3806BEE17E18E8800207C36 /* Button.mm in Sources */,
 				C3806BFC17E2F84600207C36 /* TextureLoader.mm in Sources */,
+				C38B0A9817E47E0B006B1003 /* FigureBaseMatrix.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +426,7 @@
 				C3806B5617D8E67800207C36 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

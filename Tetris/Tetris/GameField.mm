@@ -121,7 +121,7 @@ bool GameField::ValidateMove(const GridPoint& newPosition) const
 {
 	const USize sz = activeFigure_->Size();
 	const UPoint rightTop = {newPosition.x + sz.w - 1, newPosition.y + sz.h - 1};
-	return newPosition.x >= 0 && rightTop.x <= RIGHT;
+	return newPosition.x >= 0 && rightTop.x <= RIGHT && !blocks_->CollidesWith(*activeFigure_, newPosition);
 }
 
 ///
