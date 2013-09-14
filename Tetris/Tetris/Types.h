@@ -38,6 +38,7 @@ struct Line
 } // namespace
 
 using UPoint = Game::Point<unsigned int>;
+using GridPoint = Game::Point<int>;
 using USize = Game::Size<unsigned int>;
 
 #endif

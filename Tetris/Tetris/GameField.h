@@ -34,15 +34,20 @@ public:
 
 private:
 	void NewFigure();
-	bool ValidateMove(const UPoint& newPosition) const;
-	bool ValidateRotation(const UPoint& newPosition, const USize& newSize) const;
+	void DropFigure();
+	bool ValidateMove(const GridPoint& newPosition) const;
+	bool ValidateMoveDown(const GridPoint& newPosition) const;
+	bool ValidateRotation(const GridPoint& newPosition, const USize& newSize) const;
 
 	static const unsigned short RIGHT = 12;
 	const unsigned short TOP;
+	
 	std::shared_ptr<Figure> activeFigure_;
+	std::shared_ptr<Figure> blocks_;
 
 	std::vector<std::function<void()>> actions_;
 	std::mutex actionsAccess_;
+	mutable bool touchdown_;
 };
 
 #endif /* defined(__Tetris__GameField__) */

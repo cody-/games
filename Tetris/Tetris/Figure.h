@@ -19,11 +19,13 @@ class Figure
 	: public Node
 {
 public:
-	Figure(UPoint topCenter);
+	Figure(GridPoint topCenter);
+	Figure(GridPoint position, USize size); // zero constructor
 	USize Size() const { return size_; };
+	GridPoint Position() const { return gridPosition_; }
 
-	using PositionValidator = std::function<bool(const UPoint&)>;
-	using PositionSizeValidator = std::function<bool(const UPoint&, const USize&)>;
+	using PositionValidator = std::function<bool(const GridPoint&)>;
+	using PositionSizeValidator = std::function<bool(const GridPoint&, const USize&)>;
 	using BaseMatrix = std::vector<std::vector<bool>>;
 	
 	void MoveLeft(PositionValidator validator);
@@ -31,13 +33,16 @@ public:
 	void MoveDown(PositionValidator validator);
 	void Rotate(PositionSizeValidator validator);
 
+	bool CollidesWith(const Figure& rhs, const GridPoint& rhsPosition) const;
+	void operator+=(const Figure& rhs); // Requirement rhs must be to the top right from the current figure
+
 private:
 	void SetBaseMatrix(BaseMatrix m, const USize* pSize = nullptr);
-	void SetGridPosition(UPoint position);
+	void SetGridPosition(GridPoint position);
 	void SetGridSize(USize size);
-	void MoveTo(UPoint newPosition, PositionValidator validator);
+	void MoveTo(GridPoint newPosition, PositionValidator validator);
 
-	UPoint gridPosition_;
+	GridPoint gridPosition_;
 	USize size_;
 	BaseMatrix baseMatrix_;
 };

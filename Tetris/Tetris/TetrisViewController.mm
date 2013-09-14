@@ -11,16 +11,18 @@
 #import "Scene.h"
 #include "./TextureLoader.h"
 
-@interface TetrisViewController()
+@interface TetrisViewController() <UIGestureRecognizerDelegate>
 {
 	ShaderProgram* program_;
 	Scene* scene_;
 }
 
 @property (strong, nonatomic) EAGLContext* context;
+@property (strong) NSTimer* touchTimer;
 
 - (void)setupGL;
 - (void)tearDownGL;
+- (void)touchByTimer:(NSTimer*)timer;
 
 @end
 
@@ -45,9 +47,7 @@
 	program_->projectionMatrix = GLKMatrix4MakeOrtho(0, windowSize.width, 0, windowSize.height, -1024, 1024);
 	scene_ = new Scene(windowSize);
 
-	// Tap recognizer
-	UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapFrom:)];
-	[self.view addGestureRecognizer:tapRecognizer];
+	[self.view setMultipleTouchEnabled:YES];
 
 	[self setupGL];
 }
@@ -59,13 +59,57 @@
 }
 
 ///
-- (void)handleTapFrom:(UITapGestureRecognizer*)recognizer
+- (void)handleTouch:(UITouch*)touch
 {
 	// Flip touch point (iPad coord system -> OpenGL coord system)
-	CGPoint touchLocation = [recognizer locationInView:recognizer.view];
-	touchLocation = CGPointMake(touchLocation.x, 768 - touchLocation.y);
+	CGPoint location = [touch locationInView:self.view];
+	scene_->HandleTap(CGPointMake(location.x, self.view.bounds.size.height - location.y));
+}
 
-	scene_->HandleTap(touchLocation);
+///
+- (void)touchByTimer:(NSTimer*)timer
+{
+	UITouch* touch = [timer userInfo];
+	[self handleTouch:touch];
+}
+
+///
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	for (UITouch* touch in touches)
+	{
+		[self handleTouch:touch];
+		if (!self.touchTimer)
+		{
+			self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(touchByTimer:) userInfo:touch repeats:YES];
+			[self.touchTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
+			[[NSRunLoop currentRunLoop] addTimer:self.touchTimer forMode:NSDefaultRunLoopMode];
+		}
+	}
+}
+
+///
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	for (UITouch* touch in touches)
+	{
+		if (self.touchTimer && self.touchTimer.userInfo == touch)
+		{
+			[self.touchTimer invalidate];
+			self.touchTimer = nil;
+		}
+	}
+}
+
+///
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+}
+
+///
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	[self touchesEnded:touches withEvent:event];
 }
 
 ///
