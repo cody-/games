@@ -9,8 +9,9 @@
 #include "Square.h"
 
 ///
-Square::Square(UPoint position)
+Square::Square(UPoint position, GLKVector3 color)
 	: TexturedNode("black-square32.png", {SIDE, SIDE})
+	, color_(color)
 {
 	SetGridPosition(position);
 }
@@ -25,7 +26,7 @@ void Square::SetGridPosition(UPoint position)
 void Square::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
 {
 	glUniform1i(program.uniforms.useColor, 1);
-	glUniform4f(program.uniforms.color, 1.0, 0.0, 0.0, 1.0);
+	glUniform4f(program.uniforms.color, color_.r, color_.g, color_.b, 1.0);
 
 	TexturedNode::Render(program, modelViewMatrix);
 }

@@ -44,6 +44,7 @@ private:
 
 	GridPoint gridPosition_;
 	FigureBaseMatrix baseMatrix_;
+	const GLKVector3 color_;
 };
 
 #endif /* defined(__Tetris__Figure__) */

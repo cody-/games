@@ -9,6 +9,7 @@
 #include "./Figure.h"
 #include "./Square.h"
 #include <vector>
+#include <random>
 
 using namespace std;
 
@@ -22,20 +23,52 @@ namespace
 		 {1, 1, 0}},
 
 		{{1, 1, 1},
-		 {0, 0, 1}}
+		 {0, 0, 1}},
+
+		{{1, 1, 1},
+		 {1, 0, 0}},
+
+		{{1, 1},
+		 {1, 1}},
+
+		{{1, 1, 1},
+		 {0, 1, 0}},
+
+		{{1, 1, 1, 1}}
 	};
+
+//	const vector<GLKVector3> colors = {
+//		{0.04, 0.27, 0.06}, // dark green
+//		{0, 1, 0}, // green
+//		{0, 0, 1}, // blue
+//		{0, 1, 1}, // cyan
+//		{1, 0, 1}, // ??
+//		{1, 1, 0} // ??
+//	};
+}
+
+///
+template <class T>
+T Random(const vector<T>& v)
+{
+	static random_device rd;
+	static mt19937 gn(rd());
+	static uniform_int_distribution<> dist(0, v.size() - 1);
+
+	return v[dist(gn)];
 }
 
 ///
 Figure::Figure(GridPoint topCenter)
+	: color_({1, 0, 0})
 {
-	const size_t f = 0; // TODO(cody): choose randomly
-	SetBaseMatrix(figures[f]);
+	SetBaseMatrix(Random(figures));
 	SetGridPosition({topCenter.x - static_cast<int>(Size().w)/2, topCenter.y - (static_cast<int>(Size().h) - 1)});
 }
 
 ///
 Figure::Figure(GridPoint position, USize size)
+	: color_({0.04, 0.27, 0.06})
 {
 	SetGridPosition(position);
 	SetBaseMatrix(size);
@@ -88,7 +121,7 @@ void Figure::SetBaseMatrix(FigureBaseMatrix m)
 	for (size_t i = 0; i < Size().w; ++i)
 		for (size_t j = 0; j < Size().h; ++j)
 			if (baseMatrix_[i][j])
-				children_.push_back(shared_ptr<Node>(new Square({i, j})));
+				children_.push_back(shared_ptr<Node>(new Square({i, j}, color_)));
 }
 
 ///
@@ -142,7 +175,7 @@ void Figure::operator+=(const Figure& rhs)
 			newBase[relI][relJ] = rhs.baseMatrix_[i][j];
 			if (newBase[relI][relJ])
 			{
-				children_.push_back(shared_ptr<Node>(new Square({relI, relJ})));
+				children_.push_back(shared_ptr<Node>(new Square({relI, relJ}, color_)));
 			}
 		}
 

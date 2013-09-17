@@ -18,11 +18,12 @@ class Square
 {
 public:
 	static const unsigned short SIDE = 32;
-	Square(UPoint position);
+	Square(UPoint position, GLKVector3 color);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 private:
 	void SetGridPosition(UPoint position);
+	const GLKVector3 color_;
 };
 
 #endif /* defined(__Tetris__Square__) */
