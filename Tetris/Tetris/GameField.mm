@@ -20,13 +20,12 @@ unsigned int GameField::Width()
 }
 
 ///
-GameField::GameField(CGPoint position, CGFloat height)
+GameField::GameField(CGFloat height, function<shared_ptr<Figure>()> figureGenerator)
 	: TexturedNode("black-square32.png", {static_cast<CGFloat>(Width()), height}, TextureMode::REPEAT)
 	, TOP(height/Square::SIDE - 1)
+	, figureGenerator_(figureGenerator)
 	, touchdown_(false)
 {
-	SetPosition(position);
-
 	auto lBorder = new Border({-Border::WIDTH, 0}, contentSize_.height);
 	children_.push_back(shared_ptr<Node>(lBorder));
 	auto rBorder = new Border({contentSize_.width, 0}, contentSize_.height);
@@ -40,7 +39,8 @@ GameField::GameField(CGPoint position, CGFloat height)
 ///
 void GameField::NewFigure()
 {
-	activeFigure_ = make_shared<Figure>(GridPoint{RIGHT/2, TOP});
+	activeFigure_ = figureGenerator_();
+	activeFigure_->SetPosition({RIGHT/2 - static_cast<int>(activeFigure_->Size().w)/2, TOP - (static_cast<int>(activeFigure_->Size().h) - 1)});
 	children_.push_back(activeFigure_);
 }
 

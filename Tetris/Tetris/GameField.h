@@ -23,7 +23,7 @@ class GameField
 public:
 	static unsigned int Width();
 
-	GameField(CGPoint position, CGFloat height);
+	GameField(CGFloat height, std::function<std::shared_ptr<Figure>()> figureGenerator);
 	void Update(float dt) override;
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
@@ -41,7 +41,8 @@ private:
 
 	static const unsigned short RIGHT = 12;
 	const unsigned short TOP;
-	
+
+	std::function<std::shared_ptr<Figure>()> figureGenerator_;
 	std::shared_ptr<Figure> activeFigure_;
 	std::shared_ptr<Figure> blocks_;
 

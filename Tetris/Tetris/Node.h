@@ -25,6 +25,7 @@ public:
 	virtual void SetPosition(CGPoint point);
 	
 	CGRect BoundingBox() const;
+	CGSize ContentSize() const { return contentSize_; }
 
 protected:
 	CGSize contentSize_;

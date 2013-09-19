@@ -9,6 +9,7 @@
 #include "./Scene.h"
 #include "./GameField.h"
 #include "./Button.h"
+#include "./Square.h"
 
 using namespace std;
 
@@ -23,8 +24,15 @@ Scene::Scene(const CGSize& size)
 	CGFloat btnRadius = 40;
 
 	CGFloat offset = 3*btnOffsetX + 4*btnRadius;
-	gameField_ = shared_ptr<GameField>(new GameField(CGPointMake(offset, 0), size.height));
+
+	nextController_ = make_shared<NextController>(USize{4U, 4U});
+	children_.push_back(nextController_);
+
+	gameField_ = shared_ptr<GameField>(new GameField(size.height, [&]() { return nextController_->NextFigure(); }));
 	children_.push_back(gameField_);
+
+	gameField_->SetPosition(CGPointMake(offset, 0));
+	nextController_->SetPosition({offset + gameField_->ContentSize().width + Square::SIDE, contentSize_.height - nextController_->ContentSize().height - Square::SIDE});
 	
 	children_.push_back(unique_ptr<Node>(new Button("rotate-ccw.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), btnY}, [&]{ gameField_->Rotate(); })));
 	children_.push_back(unique_ptr<Node>(new Button("arrow left.png", btnRadius, {btnOffsetX, btnY}, [&]{ gameField_->MoveLeft(); })));

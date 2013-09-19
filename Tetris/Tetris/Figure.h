@@ -20,10 +20,12 @@ class Figure
 	: public Node
 {
 public:
-	Figure(GridPoint topCenter);
+	Figure(); // random figure
 	Figure(GridPoint position, USize size); // zero constructor
 	USize Size() const { return baseMatrix_.Size(); };
 	GridPoint Position() const { return gridPosition_; }
+
+	void SetPosition(GridPoint position);
 
 	using PositionValidator = std::function<bool(const GridPoint&)>;
 	using PositionSizeValidator = std::function<bool(const GridPoint&, const USize&)>;
@@ -38,7 +40,6 @@ public:
 
 private:
 	void SetBaseMatrix(FigureBaseMatrix m);
-	void SetGridPosition(GridPoint position);
 	void UpdateViewSize();
 	void MoveTo(GridPoint newPosition, PositionValidator validator);
 

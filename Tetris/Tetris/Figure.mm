@@ -37,14 +37,8 @@ namespace
 		{{1, 1, 1, 1}}
 	};
 
-//	const vector<GLKVector3> colors = {
-//		{0.04, 0.27, 0.06}, // dark green
-//		{0, 1, 0}, // green
-//		{0, 0, 1}, // blue
-//		{0, 1, 1}, // cyan
-//		{1, 0, 1}, // ??
-//		{1, 1, 0} // ??
-//	};
+	const GLKVector3 RED = {1, 0, 0};
+	const GLKVector3 DARK_GREEN = {0.04, 0.27, 0.06};
 }
 
 ///
@@ -65,18 +59,26 @@ inline T Random(const vector<T>& v)
 }
 
 ///
-Figure::Figure(GridPoint topCenter)
-	: color_({1, 0, 0})
+GLKVector3 RandomColor()
+{
+	int r = Random(0, 255);
+	int g = Random(0, 255);
+	int b = Random(0, 255);
+	return {r/256.0f, g/256.0f, b/256.0f};
+}
+
+///
+Figure::Figure()
+	: color_(RandomColor())
 {
 	SetBaseMatrix(FigureBaseMatrix(Random(figures)).Rotated(Random(0, 3)));
-	SetGridPosition({topCenter.x - static_cast<int>(Size().w)/2, topCenter.y - (static_cast<int>(Size().h) - 1)});
 }
 
 ///
 Figure::Figure(GridPoint position, USize size)
-	: color_({0.04, 0.27, 0.06})
+	: color_(DARK_GREEN)
 {
-	SetGridPosition(position);
+	SetPosition(position);
 	SetBaseMatrix(size);
 }
 
@@ -84,7 +86,7 @@ Figure::Figure(GridPoint position, USize size)
 inline void Figure::MoveTo(GridPoint newPosition, PositionValidator validator)
 {
 	if (validator(newPosition))
-		SetGridPosition(newPosition);
+		SetPosition(newPosition);
 }
 
 ///
@@ -127,7 +129,7 @@ void Figure::SetBaseMatrix(FigureBaseMatrix m)
 }
 
 ///
-void Figure::SetGridPosition(GridPoint position)
+void Figure::SetPosition(GridPoint position)
 {
 	gridPosition_ = move(position);
 	Node::SetPosition(CGPointMake(gridPosition_.x * Square::SIDE, gridPosition_.y * Square::SIDE));
@@ -177,7 +179,7 @@ void Figure::operator+=(const Figure& rhs)
 			newBase[relI][relJ] = rhs.baseMatrix_[i][j];
 			if (newBase[relI][relJ])
 			{
-				children_.push_back(shared_ptr<Node>(new Square({relI, relJ}, color_)));
+				children_.push_back(shared_ptr<Node>(new Square({relI, relJ}, rhs.color_)));
 			}
 		}
 

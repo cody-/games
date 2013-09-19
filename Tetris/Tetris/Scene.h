@@ -11,6 +11,7 @@
 
 #import "./TexturedNode.h"
 #include "./GameField.h"
+#include "./NextController.h"
 #include <memory>
 
 ///
@@ -22,6 +23,7 @@ public:
 	bool HandleTap(const CGPoint& point) override;
 
 private:
+	std::shared_ptr<NextController> nextController_;
 	std::shared_ptr<GameField> gameField_;
 };
 
