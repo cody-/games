@@ -184,8 +184,8 @@
 				C3806BEC17E18E8500207C36 /* Button.mm */,
 				C3806BFB17E2F84400207C36 /* TextureLoader.h */,
 				C3806BFA17E2F84200207C36 /* TextureLoader.mm */,
-				C38B0A9617E47E0B006B1003 /* FigureBaseMatrix.mm */,
 				C38B0A9717E47E0B006B1003 /* FigureBaseMatrix.h */,
+				C38B0A9617E47E0B006B1003 /* FigureBaseMatrix.mm */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";

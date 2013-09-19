@@ -26,6 +26,10 @@ public:
 
 	USize Size() const { return size_; }
 
+	FigureBaseMatrix RotatedCCW() const;
+	FigureBaseMatrix RotatedCW() const;
+	FigureBaseMatrix Rotated(int times) const;
+
 private:
 	USize size_;
 	std::vector<Column> columns_;

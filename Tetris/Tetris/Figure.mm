@@ -48,21 +48,27 @@ namespace
 }
 
 ///
-template <class T>
-T Random(const vector<T>& v)
+int Random(int x0, int x1)
 {
 	static random_device rd;
 	static mt19937 gn(rd());
-	static uniform_int_distribution<> dist(0, v.size() - 1);
+	uniform_int_distribution<> dist(x0, x1);
 
-	return v[dist(gn)];
+	return dist(gn);
+}
+
+///
+template <class T>
+inline T Random(const vector<T>& v)
+{
+	return v[Random(0, v.size() - 1)];
 }
 
 ///
 Figure::Figure(GridPoint topCenter)
 	: color_({1, 0, 0})
 {
-	SetBaseMatrix(Random(figures));
+	SetBaseMatrix(FigureBaseMatrix(Random(figures)).Rotated(Random(0, 3)));
 	SetGridPosition({topCenter.x - static_cast<int>(Size().w)/2, topCenter.y - (static_cast<int>(Size().h) - 1)});
 }
 
@@ -102,11 +108,7 @@ void Figure::MoveDown(PositionValidator validator)
 ///
 void Figure::Rotate(PositionSizeValidator validator)
 {
-	FigureBaseMatrix newBase({Size().h, Size().w});
-	for (size_t i = 0; i < Size().w; ++i)
-		for (size_t j = 0; j < Size().h; ++j)
-			newBase[j][i] = baseMatrix_[i][newBase.Size().w - 1 - j];
-
+	FigureBaseMatrix newBase = baseMatrix_.Rotated(-1);
 	if (validator(gridPosition_, newBase.Size()))
 		SetBaseMatrix(move(newBase));
 }

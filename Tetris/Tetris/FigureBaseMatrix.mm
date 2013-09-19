@@ -43,3 +43,40 @@ const FigureBaseMatrix::Column& FigureBaseMatrix::operator[](size_t i) const
 {
 	return columns_[i];
 }
+
+///
+FigureBaseMatrix FigureBaseMatrix::RotatedCCW() const
+{
+	FigureBaseMatrix rotated({size_.h, size_.w});
+	for (size_t i = 0; i < size_.w; ++i)
+		for (size_t j = 0; j < size_.h; ++j)
+			rotated[j][i] = (*this)[i][rotated.size_.w - 1 - j];
+
+	return rotated;
+}
+
+///
+FigureBaseMatrix FigureBaseMatrix::RotatedCW() const
+{
+	return FigureBaseMatrix(columns_);
+}
+
+///
+FigureBaseMatrix FigureBaseMatrix::Rotated(int times) const
+{
+	switch (times % 4)
+	{
+	case 0:
+		return *this;
+	case -1: case 3:
+		return RotatedCCW();
+	case 1: case -3:
+		return RotatedCW();
+	case 2: case -2:
+		return RotatedCW().RotatedCW();
+	default:
+		break;
+	}
+
+	throw "o.O";
+}
