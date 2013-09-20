@@ -45,6 +45,8 @@ bool CompositeFigure::CollidesWith(const Figure& rhs, const GridPoint& rhsPositi
 ///
 void CompositeFigure::operator+=(Figure& rhs)
 {
+	changedLines_.clear();
+
 	UPoint relativePosition = {static_cast<unsigned int>(rhs.gridPosition_.x - gridPosition_.x), static_cast<unsigned int>(rhs.gridPosition_.y - gridPosition_.y)};
 	USize newSize = {max(relativePosition.x + rhs.Size().w, Size().w), max(relativePosition.y + rhs.Size().h, Size().h)};
 	FigureBaseMatrix newBase(newSize);
@@ -74,16 +76,14 @@ void CompositeFigure::operator+=(Figure& rhs)
 }
 
 ///
-unsigned CompositeFigure::RmFullLines()
+vector<int> CompositeFigure::FullLines() const
 {
 	vector<int> indexes;
-	for (auto idx : changedLines_)
-		if (LineFull(idx))
-			indexes.push_back(idx);
+	copy_if(begin(changedLines_), end(changedLines_), back_inserter(indexes), [&](int idx){
+		return LineFull(idx);
+	});
 
-	RmLines(indexes);
-	changedLines_.clear();
-	return indexes.size();
+	return indexes;
 }
 
 ///
@@ -97,20 +97,57 @@ bool CompositeFigure::LineFull(int idx) const
 }
 
 ///
-void CompositeFigure::RmLines(const vector<int>& indexes)
+unique_ptr<CompositeFigure> CompositeFigure::CutRows(int idx0, int idx1)
 {
-	if (indexes.size() == 0)
-		return;
-
-	USize newSize = {Size().w, Size().h - indexes.size()};
-	FigureBaseMatrix newBase(newSize);
-	for (size_t j = 0, j1 = 0; j < Size().h; ++j)
-		if (find(begin(indexes), end(indexes), j) == end(indexes))
+	auto slice = unique_ptr<CompositeFigure>(new CompositeFigure({Size().w, static_cast<unsigned>(idx1 - idx0)}));
+	slice->SetPosition({0, idx0});
+	for (size_t i = 0; i < slice->Size().w; ++i)
+		for (size_t j = 0; j < slice->Size().h; ++j)
 		{
-			for (size_t i = 0; i < Size().w; ++i)
-				newBase[i][j1] = baseMatrix_[i][j];
-			++j1;
+			slice->baseMatrix_[i][j] = baseMatrix_[i][idx0 + j];
+			baseMatrix_[i][idx0 + j] = 0;
 		}
 
-	SetBaseMatrix(newBase);
+	// Partition pieces_: ours first, than those belong to slice
+	auto sliceFirstPiece = partition(begin(pieces_), end(pieces_), [&](const unique_ptr<Square>& square) {
+		return idx0 > square->Position().y || square->Position().y >= idx1;
+	});
+
+	// Move new pieces to slice
+	for (auto p = sliceFirstPiece; p != end(pieces_); ++p)
+	{
+		(*p)->Move(0, -idx0);
+		slice->pieces_.push_back(move(*p));
+	}
+
+	// Remove moved pieces
+	pieces_.erase(sliceFirstPiece, end(pieces_));
+
+	return slice;
 }
+
+///
+unique_ptr<CompositeFigure> CompositeFigure::CutRows(int idx0)
+{
+	return CutRows(idx0, Size().h);
+}
+
+//
+/////
+//void CompositeFigure::RmLines(const vector<int>& indexes)
+//{
+//	if (indexes.size() == 0)
+//		return;
+//
+//	USize newSize = {Size().w, Size().h - indexes.size()};
+//	FigureBaseMatrix newBase(newSize);
+//	for (size_t j = 0, j1 = 0; j < Size().h; ++j)
+//		if (find(begin(indexes), end(indexes), j) == end(indexes))
+//		{
+//			for (size_t i = 0; i < Size().w; ++i)
+//				newBase[i][j1] = baseMatrix_[i][j];
+//			++j1;
+//		}
+//
+//	SetBaseMatrix(newBase);
+//}

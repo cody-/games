@@ -27,6 +27,7 @@ public:
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 	void SetPosition(GridPoint position);
+	void Print() const { baseMatrix_.Print(); }
 
 protected:
 	void SetBaseMatrix(FigureBaseMatrix m);

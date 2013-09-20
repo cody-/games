@@ -21,11 +21,12 @@ public:
 	bool CollidesWith(const Figure& rhs, const GridPoint& rhsPosition) const;
 	void operator+=(Figure& rhs); // Requirement rhs must be to the top right from the current figure
 
-	unsigned RmFullLines();
-
+	std::vector<int> FullLines() const;
+	std::unique_ptr<CompositeFigure> CutRows(int idx0, int idx1);
+	std::unique_ptr<CompositeFigure> CutRows(int idx0);
+	
 private:
 	bool LineFull(int idx) const;
-	void RmLines(const std::vector<int>& indexes);
 	
 	std::vector<int> changedLines_;
 };

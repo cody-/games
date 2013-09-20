@@ -49,8 +49,9 @@ void GameField::NewFigure()
 ///
 void GameField::DropFigure()
 {
-	figureStack_->Push(*activeFigure_);
 	children_.erase(remove(begin(children_), end(children_), activeFigure_));
+	figureStack_->Push(*activeFigure_);
+	figureStack_->RmFullLines(); // TODO(cody): get statistics
 }
 
 ///

@@ -20,6 +20,7 @@ public:
 	static const unsigned short SIDE = 32;
 	Square(UPoint position, GLKVector3 color);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
+	UPoint Position() const { return position_; }
 
 	void Move(int dx, int dy);
 

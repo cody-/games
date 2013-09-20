@@ -25,7 +25,7 @@ void Figure::SetBaseMatrix(FigureBaseMatrix m)
 	baseMatrix_ = move(m);
 	UpdateViewSize();
 	
-	children_.clear();
+	pieces_.clear();
 	for (size_t i = 0; i < Size().w; ++i)
 		for (size_t j = 0; j < Size().h; ++j)
 			if (baseMatrix_[i][j])

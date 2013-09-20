@@ -22,9 +22,18 @@ public:
 	FigureStack(unsigned int width);
 	void Push(Figure& figure);
 	bool CollidesWith(const Figure& figure, const GridPoint& figurePosition) const;
+	unsigned RmFullLines();
+
+	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 private:
-	std::list<std::shared_ptr<CompositeFigure>> figures_;
+	CompositeFigure& Top();
+	const CompositeFigure& Top() const;
+	std::unique_ptr<CompositeFigure> PopBack();
+	std::unique_ptr<CompositeFigure> PopFront();
+	
+	
+	std::list<std::unique_ptr<CompositeFigure>> figures_;
 };
 
 #endif /* defined(__Tetris__FigureStack__) */
