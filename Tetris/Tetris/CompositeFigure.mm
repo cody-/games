@@ -43,7 +43,7 @@ bool CompositeFigure::CollidesWith(const Figure& rhs, const GridPoint& rhsPositi
 }
 
 ///
-void CompositeFigure::operator+=(const Figure& rhs)
+void CompositeFigure::operator+=(Figure& rhs)
 {
 	UPoint relativePosition = {static_cast<unsigned int>(rhs.gridPosition_.x - gridPosition_.x), static_cast<unsigned int>(rhs.gridPosition_.y - gridPosition_.y)};
 	USize newSize = {max(relativePosition.x + rhs.Size().w, Size().w), max(relativePosition.y + rhs.Size().h, Size().h)};
@@ -59,12 +59,14 @@ void CompositeFigure::operator+=(const Figure& rhs)
 		for (size_t i = 0; i < rhs.Size().w; ++i)
 		{
 			size_t relI = relativePosition.x + i;
-			if (rhs.baseMatrix_[i][j])
-			{
-				newBase[relI][relJ] = rhs.baseMatrix_[i][j];
-				children_.push_back(shared_ptr<Node>(new Square({relI, relJ}, rhs.color_)));
-			}
+			newBase[relI][relJ] = newBase[relI][relJ] || rhs.baseMatrix_[i][j];
 		}
+	}
+
+	for (auto& p : rhs.pieces_)
+	{
+		p->Move(relativePosition.x, relativePosition.y);
+		pieces_.push_back(move(p));
 	}
 
 	baseMatrix_ = newBase;

@@ -20,7 +20,7 @@ class FigureStack
 {
 public:
 	FigureStack(unsigned int width);
-	void Push(const Figure& figure);
+	void Push(Figure& figure);
 	bool CollidesWith(const Figure& figure, const GridPoint& figurePosition) const;
 
 private:

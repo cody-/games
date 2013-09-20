@@ -21,8 +21,12 @@ public:
 	Square(UPoint position, GLKVector3 color);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
+	void Move(int dx, int dy);
+
 private:
-	void SetGridPosition(UPoint position);
+	void SetPosition(UPoint position);
+
+	UPoint position_;
 	const GLKVector3 color_;
 };
 

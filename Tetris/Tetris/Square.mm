@@ -13,12 +13,19 @@ Square::Square(UPoint position, GLKVector3 color)
 	: TexturedNode("black-square32.png", {SIDE, SIDE})
 	, color_(color)
 {
-	SetGridPosition(position);
+	SetPosition(position);
 }
 
 ///
-void Square::SetGridPosition(UPoint position)
+void Square::Move(int dx, int dy)
 {
+	SetPosition({position_.x + dx, position_.y + dy});
+}
+
+///
+void Square::SetPosition(UPoint position)
+{
+	position_ = position;
 	TexturedNode::SetPosition(CGPointMake(position.x * SIDE, position.y * SIDE));
 }
 

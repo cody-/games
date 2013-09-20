@@ -10,6 +10,7 @@
 #define __Tetris__SingleFigure__
 
 #include "./Figure.h"
+#include <functional>
 
 /// Random figure
 class SingleFigure

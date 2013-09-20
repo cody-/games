@@ -12,7 +12,7 @@
 #include "./Node.h"
 #include "./Types.h"
 #include "./FigureBaseMatrix.h"
-#include <functional>
+#include "./Square.h"
 #include <vector>
 
 ///
@@ -24,6 +24,8 @@ public:
 	USize Size() const { return baseMatrix_.Size(); };
 	GridPoint Position() const { return gridPosition_; }
 
+	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
+
 	void SetPosition(GridPoint position);
 
 protected:
@@ -33,6 +35,7 @@ protected:
 	FigureBaseMatrix baseMatrix_;
 	const GLKVector3 color_;
 	GridPoint gridPosition_;
+	std::vector<std::unique_ptr<Square>> pieces_;
 
 	friend class CompositeFigure;
 };

@@ -20,7 +20,7 @@ FigureStack::FigureStack(unsigned int width)
 }
 
 ///
-void FigureStack::Push(const Figure& figure)
+void FigureStack::Push(Figure& figure)
 {
 	*figures_.back() += figure;
 	// RmFullLines();

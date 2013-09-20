@@ -19,7 +19,7 @@ public:
 	CompositeFigure(USize size);
 
 	bool CollidesWith(const Figure& rhs, const GridPoint& rhsPosition) const;
-	void operator+=(const Figure& rhs); // Requirement rhs must be to the top right from the current figure
+	void operator+=(Figure& rhs); // Requirement rhs must be to the top right from the current figure
 
 	unsigned RmFullLines();
 
