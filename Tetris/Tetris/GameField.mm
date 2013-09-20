@@ -20,7 +20,7 @@ unsigned int GameField::Width()
 }
 
 ///
-GameField::GameField(CGFloat height, function<shared_ptr<Figure>()> figureGenerator)
+GameField::GameField(CGFloat height, function<shared_ptr<SingleFigure>()> figureGenerator)
 	: TexturedNode("black-square32.png", {static_cast<CGFloat>(Width()), height}, TextureMode::REPEAT)
 	, TOP(height/Square::SIDE - 1)
 	, figureGenerator_(figureGenerator)
@@ -33,7 +33,8 @@ GameField::GameField(CGFloat height, function<shared_ptr<Figure>()> figureGenera
 	children_.push_back(shared_ptr<Node>(rBorder));
 
 	NewFigure();
-	blocks_ = make_shared<Figure>(GridPoint{0, 0}, USize{RIGHT + 1U, 1U});
+	blocks_ = make_shared<CompositeFigure>(USize{RIGHT + 1U, 1U});
+	blocks_->SetPosition({0, 0});
 	children_.push_back(blocks_);
 }
 

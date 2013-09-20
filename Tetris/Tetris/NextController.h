@@ -11,7 +11,7 @@
 
 #include "./TexturedNode.h"
 #include "./Types.h"
-#include "./Figure.h"
+#include "./SingleFigure.h"
 #include <memory>
 
 ///
@@ -22,11 +22,11 @@ public:
 	NextController(USize figureMaxSize);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
-	std::shared_ptr<Figure> NextFigure();
+	std::shared_ptr<SingleFigure> NextFigure();
 
 private:
 	USize size_;
-	std::shared_ptr<Figure> nextFigure_;
+	std::shared_ptr<SingleFigure> nextFigure_;
 };
 
 #endif /* defined(__Tetris__NextController__) */

@@ -29,11 +29,11 @@ void NextController::Render(const ShaderProgram& program, const GLKMatrix4& mode
 }
 
 ///
-shared_ptr<Figure> NextController::NextFigure()
+shared_ptr<SingleFigure> NextController::NextFigure()
 {
 	auto nextFigure = nextFigure_;
 
-	nextFigure_ = make_shared<Figure>();
+	nextFigure_ = make_shared<SingleFigure>();
 	nextFigure_->SetPosition({0, 0});
 	children_.clear();
 	children_.push_back(nextFigure_);

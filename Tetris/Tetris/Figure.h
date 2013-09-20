@@ -20,32 +20,21 @@ class Figure
 	: public Node
 {
 public:
-	Figure(); // random figure
-	Figure(GridPoint position, USize size); // zero constructor
+	Figure(FigureBaseMatrix baseMatrix, GLKVector3 color);
 	USize Size() const { return baseMatrix_.Size(); };
 	GridPoint Position() const { return gridPosition_; }
 
 	void SetPosition(GridPoint position);
 
-	using PositionValidator = std::function<bool(const GridPoint&)>;
-	using PositionSizeValidator = std::function<bool(const GridPoint&, const USize&)>;
-	
-	void MoveLeft(PositionValidator validator);
-	void MoveRight(PositionValidator validator);
-	void MoveDown(PositionValidator validator);
-	void Rotate(PositionSizeValidator validator);
-
-	bool CollidesWith(const Figure& rhs, const GridPoint& rhsPosition) const;
-	void operator+=(const Figure& rhs); // Requirement rhs must be to the top right from the current figure
-
-private:
+protected:
 	void SetBaseMatrix(FigureBaseMatrix m);
 	void UpdateViewSize();
-	void MoveTo(GridPoint newPosition, PositionValidator validator);
 
-	GridPoint gridPosition_;
 	FigureBaseMatrix baseMatrix_;
 	const GLKVector3 color_;
+	GridPoint gridPosition_;
+
+	friend class CompositeFigure;
 };
 
 #endif /* defined(__Tetris__Figure__) */

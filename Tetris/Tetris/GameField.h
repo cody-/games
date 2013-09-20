@@ -10,7 +10,8 @@
 #define __Tetris__GameField__
 
 #include "./TexturedNode.h"
-#include "./Figure.h"
+#include "./SingleFigure.h"
+#include "./CompositeFigure.h"
 #include <memory>
 #include <vector>
 #include <functional>
@@ -23,7 +24,7 @@ class GameField
 public:
 	static unsigned int Width();
 
-	GameField(CGFloat height, std::function<std::shared_ptr<Figure>()> figureGenerator);
+	GameField(CGFloat height, std::function<std::shared_ptr<SingleFigure>()> figureGenerator);
 	void Update(float dt) override;
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
@@ -44,10 +45,10 @@ private:
 	static const unsigned short RIGHT = 12;
 	const unsigned short TOP;
 
-	std::function<std::shared_ptr<Figure>()> figureGenerator_;
+	std::function<std::shared_ptr<SingleFigure>()> figureGenerator_;
 	std::function<void()> touchdownCallback_;
-	std::shared_ptr<Figure> activeFigure_;
-	std::shared_ptr<Figure> blocks_;
+	std::shared_ptr<SingleFigure> activeFigure_;
+	std::shared_ptr<CompositeFigure> blocks_;
 
 	std::vector<std::function<void()>> actions_;
 	std::mutex actionsAccess_;
