@@ -46,6 +46,7 @@
 		C398FAC917EB28A600ECECBA /* NextController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FAC717EB28A500ECECBA /* NextController.mm */; };
 		C398FACC17EC212C00ECECBA /* SingleFigure.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FACA17EC212A00ECECBA /* SingleFigure.mm */; };
 		C398FACF17EC238300ECECBA /* CompositeFigure.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FACD17EC238100ECECBA /* CompositeFigure.mm */; };
+		C398FAD217EC3D3E00ECECBA /* FigureStack.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FAD017EC3D3C00ECECBA /* FigureStack.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +112,8 @@
 		C398FACB17EC212B00ECECBA /* SingleFigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleFigure.h; sourceTree = "<group>"; };
 		C398FACD17EC238100ECECBA /* CompositeFigure.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CompositeFigure.mm; sourceTree = "<group>"; };
 		C398FACE17EC238200ECECBA /* CompositeFigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeFigure.h; sourceTree = "<group>"; };
+		C398FAD017EC3D3C00ECECBA /* FigureStack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FigureStack.mm; sourceTree = "<group>"; };
+		C398FAD117EC3D3D00ECECBA /* FigureStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureStack.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +204,8 @@
 				C38B0A9617E47E0B006B1003 /* FigureBaseMatrix.mm */,
 				C398FAC817EB28A500ECECBA /* NextController.h */,
 				C398FAC717EB28A500ECECBA /* NextController.mm */,
+				C398FAD117EC3D3D00ECECBA /* FigureStack.h */,
+				C398FAD017EC3D3C00ECECBA /* FigureStack.mm */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -332,6 +337,7 @@
 				C398FAC917EB28A600ECECBA /* NextController.mm in Sources */,
 				C398FACC17EC212C00ECECBA /* SingleFigure.mm in Sources */,
 				C398FACF17EC238300ECECBA /* CompositeFigure.mm in Sources */,
+				C398FAD217EC3D3E00ECECBA /* FigureStack.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

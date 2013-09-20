@@ -52,18 +52,63 @@ void CompositeFigure::operator+=(const Figure& rhs)
 		for (size_t j = 0; j < Size().h; ++j)
 			newBase[i][j] = baseMatrix_[i][j];
 
-	for (size_t i = 0; i < rhs.Size().w; ++i)
-		for (size_t j = 0; j < rhs.Size().h; ++j)
+	for (size_t j = 0; j < rhs.Size().h; ++j)
+	{
+		size_t relJ = relativePosition.y + j;
+		changedLines_.push_back(relJ);
+		for (size_t i = 0; i < rhs.Size().w; ++i)
 		{
 			size_t relI = relativePosition.x + i;
-			size_t relJ = relativePosition.y + j;
-			newBase[relI][relJ] = rhs.baseMatrix_[i][j];
-			if (newBase[relI][relJ])
+			if (rhs.baseMatrix_[i][j])
 			{
+				newBase[relI][relJ] = rhs.baseMatrix_[i][j];
 				children_.push_back(shared_ptr<Node>(new Square({relI, relJ}, rhs.color_)));
 			}
 		}
+	}
 
 	baseMatrix_ = newBase;
 	UpdateViewSize();
+}
+
+///
+unsigned CompositeFigure::RmFullLines()
+{
+	vector<int> indexes;
+	for (auto idx : changedLines_)
+		if (LineFull(idx))
+			indexes.push_back(idx);
+
+	RmLines(indexes);
+	changedLines_.clear();
+	return indexes.size();
+}
+
+///
+bool CompositeFigure::LineFull(int idx) const
+{
+	for (size_t i = 0; i < Size().w; ++i)
+		if (!baseMatrix_[i][idx])
+			return false;
+
+	return true;
+}
+
+///
+void CompositeFigure::RmLines(const vector<int>& indexes)
+{
+	if (indexes.size() == 0)
+		return;
+
+	USize newSize = {Size().w, Size().h - indexes.size()};
+	FigureBaseMatrix newBase(newSize);
+	for (size_t j = 0, j1 = 0; j < Size().h; ++j)
+		if (find(begin(indexes), end(indexes), j) == end(indexes))
+		{
+			for (size_t i = 0; i < Size().w; ++i)
+				newBase[i][j1] = baseMatrix_[i][j];
+			++j1;
+		}
+
+	SetBaseMatrix(newBase);
 }

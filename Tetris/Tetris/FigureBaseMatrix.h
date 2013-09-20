@@ -30,6 +30,8 @@ public:
 	FigureBaseMatrix RotatedCW() const;
 	FigureBaseMatrix Rotated(int times) const;
 
+	void Print() const;
+
 private:
 	USize size_;
 	std::vector<Column> columns_;

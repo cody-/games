@@ -11,7 +11,7 @@
 
 #include "./TexturedNode.h"
 #include "./SingleFigure.h"
-#include "./CompositeFigure.h"
+#include "./FigureStack.h"
 #include <memory>
 #include <vector>
 #include <functional>
@@ -48,7 +48,7 @@ private:
 	std::function<std::shared_ptr<SingleFigure>()> figureGenerator_;
 	std::function<void()> touchdownCallback_;
 	std::shared_ptr<SingleFigure> activeFigure_;
-	std::shared_ptr<CompositeFigure> blocks_;
+	std::shared_ptr<FigureStack> figureStack_;
 
 	std::vector<std::function<void()>> actions_;
 	std::mutex actionsAccess_;

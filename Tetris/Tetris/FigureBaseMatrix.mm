@@ -7,6 +7,7 @@
 //
 
 #include "./FigureBaseMatrix.h"
+#include <iostream>
 
 using namespace std;
 
@@ -79,4 +80,15 @@ FigureBaseMatrix FigureBaseMatrix::Rotated(int times) const
 	}
 
 	throw "o.O";
+}
+
+///
+void FigureBaseMatrix::Print() const
+{
+	for (size_t j = 0; j < Size().h; ++j)
+	{
+		for (size_t i = 0; i < Size().w; ++i)
+			cout << " " << (*this)[i][Size().h - 1 - j];
+		cout << endl;
+	}
 }

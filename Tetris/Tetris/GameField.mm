@@ -33,9 +33,9 @@ GameField::GameField(CGFloat height, function<shared_ptr<SingleFigure>()> figure
 	children_.push_back(shared_ptr<Node>(rBorder));
 
 	NewFigure();
-	blocks_ = make_shared<CompositeFigure>(USize{RIGHT + 1U, 1U});
-	blocks_->SetPosition({0, 0});
-	children_.push_back(blocks_);
+	figureStack_ = make_shared<FigureStack>(RIGHT + 1U);
+	figureStack_->SetPosition({0, 0});
+	children_.push_back(figureStack_);
 }
 
 ///
@@ -49,7 +49,7 @@ void GameField::NewFigure()
 ///
 void GameField::DropFigure()
 {
-	*blocks_ += *activeFigure_;
+	figureStack_->Push(*activeFigure_);
 	children_.erase(remove(begin(children_), end(children_), activeFigure_));
 }
 
@@ -125,13 +125,13 @@ bool GameField::ValidateMove(const GridPoint& newPosition) const
 {
 	const USize sz = activeFigure_->Size();
 	const UPoint rightTop = {newPosition.x + sz.w - 1, newPosition.y + sz.h - 1};
-	return newPosition.x >= 0 && rightTop.x <= RIGHT && !blocks_->CollidesWith(*activeFigure_, newPosition);
+	return newPosition.x >= 0 && rightTop.x <= RIGHT && !figureStack_->CollidesWith(*activeFigure_, newPosition);
 }
 
 ///
 bool GameField::ValidateMoveDown(const GridPoint& newPosition) const
 {
-	touchdown_ = newPosition.y < 0 || blocks_->CollidesWith(*activeFigure_, newPosition);
+	touchdown_ = newPosition.y < 0 || figureStack_->CollidesWith(*activeFigure_, newPosition);
 	return !touchdown_;
 }
 

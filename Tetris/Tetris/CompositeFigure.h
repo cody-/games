@@ -20,6 +20,14 @@ public:
 
 	bool CollidesWith(const Figure& rhs, const GridPoint& rhsPosition) const;
 	void operator+=(const Figure& rhs); // Requirement rhs must be to the top right from the current figure
+
+	unsigned RmFullLines();
+
+private:
+	bool LineFull(int idx) const;
+	void RmLines(const std::vector<int>& indexes);
+	
+	std::vector<int> changedLines_;
 };
 
 #endif /* defined(__Tetris__CompositeFigure__) */
