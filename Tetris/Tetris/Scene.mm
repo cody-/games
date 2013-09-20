@@ -51,3 +51,9 @@ bool Scene::HandleTap(const CGPoint& point)
 
 	return true;
 }
+
+///
+void Scene::SetTouchdownCallback(std::function<void ()> cb)
+{
+	gameField_->SetTouchdownCallback(cb);
+}

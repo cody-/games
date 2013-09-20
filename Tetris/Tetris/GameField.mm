@@ -24,6 +24,7 @@ GameField::GameField(CGFloat height, function<shared_ptr<Figure>()> figureGenera
 	: TexturedNode("black-square32.png", {static_cast<CGFloat>(Width()), height}, TextureMode::REPEAT)
 	, TOP(height/Square::SIDE - 1)
 	, figureGenerator_(figureGenerator)
+	, touchdownCallback_(nullptr)
 	, touchdown_(false)
 {
 	auto lBorder = new Border({-Border::WIDTH, 0}, contentSize_.height);
@@ -63,6 +64,8 @@ void GameField::Update(float dt)
 
 	if (touchdown_)
 	{
+		if (touchdownCallback_)
+			touchdownCallback_();
 		touchdown_ = false;
 		DropFigure();
 		NewFigure();
@@ -137,6 +140,12 @@ bool GameField::ValidateRotation(const GridPoint& newPosition, const USize& newS
 	const UPoint rightTop = {newPosition.x + newSize.w - 1, newPosition.y + newSize.h - 1};
 	return newPosition.x >= 0 && rightTop.x <= RIGHT
 		&& newPosition.y >= 0 && rightTop.y <= TOP;
+}
+
+///
+void GameField::SetTouchdownCallback(function<void ()> cb)
+{
+	touchdownCallback_ = cb;
 }
 
 

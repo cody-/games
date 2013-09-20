@@ -11,6 +11,8 @@
 #import "Scene.h"
 #include "./TextureLoader.h"
 
+bool g_resetTouchTimer = false;
+
 @interface TetrisViewController() <UIGestureRecognizerDelegate>
 {
 	ShaderProgram* program_;
@@ -23,6 +25,8 @@
 - (void)setupGL;
 - (void)tearDownGL;
 - (void)touchByTimer:(NSTimer*)timer;
+- (void)resetTouchTimer;
+- (void)setNewTimerForTouch:(UITouch*)touch;
 
 @end
 
@@ -46,6 +50,7 @@
 	CGSize windowSize = CGSizeMake(self.view.bounds.size.height, self.view.bounds.size.width); // Album orientation
 	program_->projectionMatrix = GLKMatrix4MakeOrtho(0, windowSize.width, 0, windowSize.height, -1024, 1024);
 	scene_ = new Scene(windowSize);
+	scene_->SetTouchdownCallback([&]{ g_resetTouchTimer = true; });
 
 	[self.view setMultipleTouchEnabled:YES];
 
@@ -74,6 +79,26 @@
 }
 
 ///
+- (void)resetTouchTimer
+{
+	g_resetTouchTimer = false;
+	if (!self.touchTimer)
+		return;
+
+	UITouch* touch = self.touchTimer.userInfo;
+	[self.touchTimer invalidate];
+	[self setNewTimerForTouch:touch];
+}
+
+///
+- (void)setNewTimerForTouch:(UITouch*)touch
+{
+	self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(touchByTimer:) userInfo:touch repeats:YES];
+	[self.touchTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
+	[[NSRunLoop currentRunLoop] addTimer:self.touchTimer forMode:NSDefaultRunLoopMode];
+}
+
+///
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	for (UITouch* touch in touches)
@@ -81,9 +106,7 @@
 		[self handleTouch:touch];
 		if (!self.touchTimer)
 		{
-			self.touchTimer = [NSTimer scheduledTimerWithTimeInterval:0.02 target:self selector:@selector(touchByTimer:) userInfo:touch repeats:YES];
-			[self.touchTimer setFireDate:[NSDate dateWithTimeIntervalSinceNow:0.2]];
-			[[NSRunLoop currentRunLoop] addTimer:self.touchTimer forMode:NSDefaultRunLoopMode];
+			[self setNewTimerForTouch:touch];
 		}
 	}
 }
@@ -173,8 +196,10 @@
 
 ///
 - (void)update
-{
+{	
 	scene_->Update(self.timeSinceLastUpdate);
+	if (g_resetTouchTimer)
+		[self resetTouchTimer];
 }
 
 @end

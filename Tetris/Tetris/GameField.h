@@ -32,6 +32,8 @@ public:
 	void MoveDown();
 	void Rotate();
 
+	void SetTouchdownCallback(std::function<void()> cb);
+
 private:
 	void NewFigure();
 	void DropFigure();
@@ -43,6 +45,7 @@ private:
 	const unsigned short TOP;
 
 	std::function<std::shared_ptr<Figure>()> figureGenerator_;
+	std::function<void()> touchdownCallback_;
 	std::shared_ptr<Figure> activeFigure_;
 	std::shared_ptr<Figure> blocks_;
 

@@ -13,6 +13,7 @@
 #include "./GameField.h"
 #include "./NextController.h"
 #include <memory>
+#include <functional>
 
 ///
 class Scene
@@ -21,6 +22,7 @@ class Scene
 public:
 	Scene(const CGSize& size);
 	bool HandleTap(const CGPoint& point) override;
+	void SetTouchdownCallback(std::function<void()> cb);
 
 private:
 	std::shared_ptr<NextController> nextController_;
