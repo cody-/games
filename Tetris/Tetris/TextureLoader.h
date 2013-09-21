@@ -21,9 +21,11 @@ public:
 	static void RemoveInstance();
 
 	GLKTextureInfo* GetTexture(const std::string& name);
+	GLKTextureInfo* GetTextTexture(std::string txt, std::string fontFamily, int fontSize);
 
 private:
 	static GLKTextureInfo* LoadTexture(const std::string& fileName);
+	static GLKTextureInfo* GenerateTextTexture(const std::string& txt, const std::string& fontFamily, int fontSize);
 
 	static TextureLoader* pInstance_;
 	std::map<std::string, GLKTextureInfo*> cache_;

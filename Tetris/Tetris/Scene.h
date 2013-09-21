@@ -12,6 +12,7 @@
 #import "./TexturedNode.h"
 #include "./GameField.h"
 #include "./NextController.h"
+#include "./InfoPanel.h"
 #include <memory>
 #include <functional>
 
@@ -24,9 +25,12 @@ public:
 	bool HandleTap(const CGPoint& point) override;
 	void SetTouchdownCallback(std::function<void()> cb);
 
+	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
+
 private:
 	std::shared_ptr<NextController> nextController_;
 	std::shared_ptr<GameField> gameField_;
+	std::shared_ptr<InfoPanel> infoPanel_;
 };
 
 #endif /* defined(__Tetris__Scene__) */

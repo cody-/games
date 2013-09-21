@@ -47,6 +47,10 @@
 		C398FACC17EC212C00ECECBA /* SingleFigure.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FACA17EC212A00ECECBA /* SingleFigure.mm */; };
 		C398FACF17EC238300ECECBA /* CompositeFigure.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FACD17EC238100ECECBA /* CompositeFigure.mm */; };
 		C398FAD217EC3D3E00ECECBA /* FigureStack.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FAD017EC3D3C00ECECBA /* FigureStack.mm */; };
+		C398FAD417ED756400ECECBA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C398FAD317ED756300ECECBA /* QuartzCore.framework */; };
+		C398FAD717ED760D00ECECBA /* TextLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FAD517ED760A00ECECBA /* TextLabel.mm */; };
+		C398FADA17ED80EE00ECECBA /* InfoPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FAD817ED80EB00ECECBA /* InfoPanel.mm */; };
+		C398FADD17ED89E800ECECBA /* NumberLabel.mm in Sources */ = {isa = PBXBuildFile; fileRef = C398FADB17ED89E500ECECBA /* NumberLabel.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +118,13 @@
 		C398FACE17EC238200ECECBA /* CompositeFigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompositeFigure.h; sourceTree = "<group>"; };
 		C398FAD017EC3D3C00ECECBA /* FigureStack.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FigureStack.mm; sourceTree = "<group>"; };
 		C398FAD117EC3D3D00ECECBA /* FigureStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FigureStack.h; sourceTree = "<group>"; };
+		C398FAD317ED756300ECECBA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C398FAD517ED760A00ECECBA /* TextLabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TextLabel.mm; sourceTree = "<group>"; };
+		C398FAD617ED760B00ECECBA /* TextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextLabel.h; sourceTree = "<group>"; };
+		C398FAD817ED80EB00ECECBA /* InfoPanel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InfoPanel.mm; sourceTree = "<group>"; };
+		C398FAD917ED80EC00ECECBA /* InfoPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoPanel.h; sourceTree = "<group>"; };
+		C398FADB17ED89E500ECECBA /* NumberLabel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NumberLabel.mm; sourceTree = "<group>"; };
+		C398FADC17ED89E600ECECBA /* NumberLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NumberLabel.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +132,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C398FAD417ED756400ECECBA /* QuartzCore.framework in Frameworks */,
 				C3806B5917D8E6D900207C36 /* GLKit.framework in Frameworks */,
 				C3806B5A17D8E6D900207C36 /* OpenGLES.framework in Frameworks */,
 				C3806B3B17D8E67800207C36 /* UIKit.framework in Frameworks */,
@@ -135,6 +147,7 @@
 		C3806B2E17D8E67800207C36 = {
 			isa = PBXGroup;
 			children = (
+				C398FAD317ED756300ECECBA /* QuartzCore.framework */,
 				C3806B5717D8E6D900207C36 /* GLKit.framework */,
 				C3806B5817D8E6D900207C36 /* OpenGLES.framework */,
 				C3806B4017D8E67800207C36 /* Tetris */,
@@ -206,6 +219,12 @@
 				C398FAC717EB28A500ECECBA /* NextController.mm */,
 				C398FAD117EC3D3D00ECECBA /* FigureStack.h */,
 				C398FAD017EC3D3C00ECECBA /* FigureStack.mm */,
+				C398FAD617ED760B00ECECBA /* TextLabel.h */,
+				C398FAD517ED760A00ECECBA /* TextLabel.mm */,
+				C398FAD917ED80EC00ECECBA /* InfoPanel.h */,
+				C398FAD817ED80EB00ECECBA /* InfoPanel.mm */,
+				C398FADC17ED89E600ECECBA /* NumberLabel.h */,
+				C398FADB17ED89E500ECECBA /* NumberLabel.mm */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -338,6 +357,9 @@
 				C398FACC17EC212C00ECECBA /* SingleFigure.mm in Sources */,
 				C398FACF17EC238300ECECBA /* CompositeFigure.mm in Sources */,
 				C398FAD217EC3D3E00ECECBA /* FigureStack.mm in Sources */,
+				C398FAD717ED760D00ECECBA /* TextLabel.mm in Sources */,
+				C398FADA17ED80EE00ECECBA /* InfoPanel.mm in Sources */,
+				C398FADD17ED89E800ECECBA /* NumberLabel.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

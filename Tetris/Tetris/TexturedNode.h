@@ -25,8 +25,10 @@ class TexturedNode
 	: public Node
 {
 public:
+	TexturedNode(GLKTextureInfo* texture);
 	TexturedNode(const std::string& fileName);
 	TexturedNode(const std::string& fileName, CGSize size, TextureMode mode = TextureMode::STRETCH);
+	
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 protected:

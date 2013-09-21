@@ -12,12 +12,18 @@
 using namespace std;
 
 ///
-TexturedNode::TexturedNode(const string& fileName)
-	: textureInfo_(TextureLoader::Instance()->GetTexture(fileName))
+TexturedNode::TexturedNode(GLKTextureInfo* texture)
+	: textureInfo_(texture)
 	, quad_(CGSizeMake(textureInfo_.width, textureInfo_.height))
 	, texMode_(TextureMode::STRETCH)
 {
 	contentSize_ = CGSizeMake(textureInfo_.width, textureInfo_.height);
+}
+
+///
+TexturedNode::TexturedNode(const string& fileName)
+	: TexturedNode(TextureLoader::Instance()->GetTexture(fileName))
+{
 }
 
 ///

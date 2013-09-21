@@ -38,6 +38,11 @@ Scene::Scene(const CGSize& size)
 	children_.push_back(unique_ptr<Node>(new Button("arrow left.png", btnRadius, {btnOffsetX, btnY}, [&]{ gameField_->MoveLeft(); })));
 	children_.push_back(unique_ptr<Node>(new Button("arrow right.png", btnRadius, {2*btnOffsetX + 2*btnRadius, btnY}, [&]{ gameField_->MoveRight(); })));
 	children_.push_back(unique_ptr<Node>(new Button("arrow down.png", btnRadius, {btnOffsetX*1.5f + btnRadius, btnY - 2*btnRadius}, [&]{ gameField_->MoveDown(); })));
+
+
+	infoPanel_ = make_shared<InfoPanel>();
+	infoPanel_->SetPosition({offset + gameField_->ContentSize().width + Square::SIDE, contentSize_.height - nextController_->ContentSize().height - 2*Square::SIDE - infoPanel_->ContentSize().height});
+	children_.push_back(infoPanel_);
 }
 
 ///
@@ -56,4 +61,12 @@ bool Scene::HandleTap(const CGPoint& point)
 void Scene::SetTouchdownCallback(std::function<void ()> cb)
 {
 	gameField_->SetTouchdownCallback(cb);
+}
+
+///
+void Scene::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
+{
+	glUniform1i(program.uniforms.useColor, 0);
+
+	TexturedNode::Render(program, modelViewMatrix);
 }
