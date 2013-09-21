@@ -43,6 +43,7 @@ Scene::Scene(const CGSize& size)
 	infoPanel_ = make_shared<InfoPanel>();
 	infoPanel_->SetPosition({offset + gameField_->ContentSize().width + Square::SIDE, contentSize_.height - nextController_->ContentSize().height - 2*Square::SIDE - infoPanel_->ContentSize().height});
 	children_.push_back(infoPanel_);
+	gameField_->SetLinesCallback([&](unsigned linesCount) { infoPanel_->UpdateLines(linesCount); });
 }
 
 ///

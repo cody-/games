@@ -51,7 +51,10 @@ void GameField::DropFigure()
 {
 	children_.erase(remove(begin(children_), end(children_), activeFigure_));
 	figureStack_->Push(*activeFigure_);
-	figureStack_->RmFullLines(); // TODO(cody): get statistics
+	
+	auto linesCount = figureStack_->RmFullLines();
+	if (linesCount && linesCallback_)
+		linesCallback_(linesCount);
 }
 
 ///
@@ -143,11 +146,3 @@ bool GameField::ValidateRotation(const GridPoint& newPosition, const USize& newS
 	return newPosition.x >= 0 && rightTop.x <= RIGHT
 		&& newPosition.y >= 0 && rightTop.y <= TOP;
 }
-
-///
-void GameField::SetTouchdownCallback(function<void ()> cb)
-{
-	touchdownCallback_ = cb;
-}
-
-

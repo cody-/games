@@ -33,7 +33,8 @@ public:
 	void MoveDown();
 	void Rotate();
 
-	void SetTouchdownCallback(std::function<void()> cb);
+	void SetTouchdownCallback(std::function<void()> cb) { touchdownCallback_ = cb; }
+	void SetLinesCallback(std::function<void(unsigned)> cb) { linesCallback_ = cb; }
 
 private:
 	void NewFigure();
@@ -47,6 +48,7 @@ private:
 
 	std::function<std::shared_ptr<SingleFigure>()> figureGenerator_;
 	std::function<void()> touchdownCallback_;
+	std::function<void(unsigned)> linesCallback_;
 	std::shared_ptr<SingleFigure> activeFigure_;
 	std::shared_ptr<FigureStack> figureStack_;
 

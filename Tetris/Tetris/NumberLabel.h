@@ -21,6 +21,9 @@ public:
 	NumberLabel(unsigned initialVal, std::string fontName, unsigned fontSize);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
+	unsigned Val() const { return val_; }
+	void SetVal(unsigned val);
+
 private:
 	void UpdateVertices();
 	static std::vector<unsigned> SplitNumber(unsigned number);

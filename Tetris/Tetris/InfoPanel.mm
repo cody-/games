@@ -57,3 +57,9 @@ shared_ptr<NumberLabel> InfoPanel::AddPanel(unsigned position, string labelText,
 
 	return val;
 }
+
+///
+void InfoPanel::UpdateLines(int diff)
+{
+	lines_->SetVal(lines_->Val() + diff);
+}

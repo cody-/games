@@ -52,6 +52,13 @@ void NumberLabel::Render(const ShaderProgram& program, const GLKMatrix4& modelVi
 }
 
 ///
+void NumberLabel::SetVal(unsigned val)
+{
+	val_ = val;
+	UpdateVertices();
+}
+
+///
 void NumberLabel::UpdateVertices()
 {
 	vertices_.clear();
