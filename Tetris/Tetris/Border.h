@@ -23,7 +23,7 @@ public:
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 private:
-	Game::Line line_;
+	Tetris::Line line_;
 };
 
 #endif /* defined(__Tetris__Border__) */

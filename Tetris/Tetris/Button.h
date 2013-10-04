@@ -12,6 +12,14 @@
 #include "./TexturedNode.h"
 #include <functional>
 
+enum class Btn
+{
+	LEFT,
+	RIGHT,
+	DOWN,
+	ROTATE
+};
+
 ///
 class Button
 	: public TexturedNode

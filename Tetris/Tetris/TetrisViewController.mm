@@ -10,6 +10,7 @@
 #import "ShaderProgram.h"
 #import "Scene.h"
 #include "./TextureLoader.h"
+#include "./Game.h"
 
 bool g_resetTouchTimer = false;
 
@@ -17,6 +18,7 @@ bool g_resetTouchTimer = false;
 {
 	ShaderProgram* program_;
 	Scene* scene_;
+	Game* game_;
 }
 
 @property (strong, nonatomic) EAGLContext* context;
@@ -50,7 +52,14 @@ bool g_resetTouchTimer = false;
 	CGSize windowSize = CGSizeMake(self.view.bounds.size.height, self.view.bounds.size.width); // Album orientation
 	program_->projectionMatrix = GLKMatrix4MakeOrtho(0, windowSize.width, 0, windowSize.height, -1024, 1024);
 	scene_ = new Scene(windowSize);
-	scene_->SetTouchdownCallback([&]{ g_resetTouchTimer = true; });
+
+	game_ = new Game(scene_->GameFieldRef());
+	game_->SetTouchdownCallback([&]{ g_resetTouchTimer = true; });
+
+	scene_->SetTrigger(Btn::ROTATE, [=]{ game_->Rotate(); });
+	scene_->SetTrigger(Btn::LEFT, [=]{ game_->MoveLeft(); });
+	scene_->SetTrigger(Btn::RIGHT, [=]{ game_->MoveRight(); });
+	scene_->SetTrigger(Btn::DOWN, [=]{ game_->MoveDown(); });
 
 	[self.view setMultipleTouchEnabled:YES];
 
@@ -140,6 +149,7 @@ bool g_resetTouchTimer = false;
 {
     [self tearDownGL];
 
+	delete game_;
 	delete scene_;
 	TextureLoader::RemoveInstance();
     
@@ -196,8 +206,8 @@ bool g_resetTouchTimer = false;
 
 ///
 - (void)update
-{	
-	scene_->Update(self.timeSinceLastUpdate);
+{
+	game_->Update(self.timeSinceLastUpdate);
 	if (g_resetTouchTimer)
 		[self resetTouchTimer];
 }

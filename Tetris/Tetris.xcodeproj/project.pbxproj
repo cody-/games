@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C303602C17E7587700C53BC1 /* rotate-ccw.png in Resources */ = {isa = PBXBuildFile; fileRef = C303602B17E7587700C53BC1 /* rotate-ccw.png */; };
+		C317A45317FDC53A00E5FC2D /* Game.mm in Sources */ = {isa = PBXBuildFile; fileRef = C317A45117FDC53A00E5FC2D /* Game.mm */; };
 		C3806B3B17D8E67800207C36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3A17D8E67800207C36 /* UIKit.framework */; };
 		C3806B3D17D8E67800207C36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3C17D8E67800207C36 /* Foundation.framework */; };
 		C3806B3F17D8E67800207C36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3E17D8E67800207C36 /* CoreGraphics.framework */; };
@@ -55,6 +56,8 @@
 
 /* Begin PBXFileReference section */
 		C303602B17E7587700C53BC1 /* rotate-ccw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rotate-ccw.png"; path = "Tetris/rotate-ccw.png"; sourceTree = "<group>"; };
+		C317A45117FDC53A00E5FC2D /* Game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Game.mm; sourceTree = "<group>"; };
+		C317A45217FDC53A00E5FC2D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		C3806B3717D8E67800207C36 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3806B3A17D8E67800207C36 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C3806B3C17D8E67800207C36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -190,6 +193,8 @@
 				C3806BC417E03D9B00207C36 /* TexturedQuad.mm */,
 				C3806BB817DE261000207C36 /* ShaderProgram.h */,
 				C3806BBC17DF678F00207C36 /* ShaderProgram.mm */,
+				C317A45217FDC53A00E5FC2D /* Game.h */,
+				C317A45117FDC53A00E5FC2D /* Game.mm */,
 				C3806BB117DE1C4F00207C36 /* Node.h */,
 				C3806BB217DE1C5000207C36 /* Node.mm */,
 				C3806BB417DE201800207C36 /* TexturedNode.h */,
@@ -343,6 +348,7 @@
 				C3806B5D17D8E71700207C36 /* TetrisViewController.mm in Sources */,
 				C3806BB317DE1C5000207C36 /* Node.mm in Sources */,
 				C3806BB617DE201800207C36 /* TexturedNode.mm in Sources */,
+				C317A45317FDC53A00E5FC2D /* Game.mm in Sources */,
 				C3806BBB17DE2AA300207C36 /* Scene.mm in Sources */,
 				C3806BBD17DF679000207C36 /* ShaderProgram.mm in Sources */,
 				C3806BC017DF73D000207C36 /* GameField.mm in Sources */,

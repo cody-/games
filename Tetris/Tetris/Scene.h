@@ -13,8 +13,10 @@
 #include "./GameField.h"
 #include "./NextController.h"
 #include "./InfoPanel.h"
+#include "./Button.h"
 #include <memory>
 #include <functional>
+#include <map>
 
 ///
 class Scene
@@ -23,14 +25,17 @@ class Scene
 public:
 	Scene(const CGSize& size);
 	bool HandleTap(const CGPoint& point) override;
-	void SetTouchdownCallback(std::function<void()> cb);
 
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
+	GameField& GameFieldRef() { return *gameField_; }
+	void ButtonPressed(Btn btn);
+	void SetTrigger(Btn btn, std::function<void()> trigger);
 
 private:
 	std::shared_ptr<NextController> nextController_;
 	std::shared_ptr<GameField> gameField_;
 	std::shared_ptr<InfoPanel> infoPanel_;
+	std::map<Btn, std::function<void()>> triggers_;
 };
 
 #endif /* defined(__Tetris__Scene__) */

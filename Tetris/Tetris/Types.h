@@ -9,7 +9,7 @@
 #ifndef Tetris_Types_h
 #define Tetris_Types_h
 
-namespace Game
+namespace Tetris
 {
 
 ///
@@ -37,8 +37,8 @@ struct Line
 
 } // namespace
 
-using UPoint = Game::Point<unsigned int>;
-using GridPoint = Game::Point<int>;
-using USize = Game::Size<unsigned int>;
+using UPoint = Tetris::Point<unsigned int>;
+using GridPoint = Tetris::Point<int>;
+using USize = Tetris::Size<unsigned int>;
 
 #endif

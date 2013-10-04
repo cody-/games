@@ -25,7 +25,6 @@ GameField::GameField(CGFloat height, function<shared_ptr<SingleFigure>()> figure
 	, TOP(height/Square::SIDE - 1)
 	, figureGenerator_(figureGenerator)
 	, touchdownCallback_(nullptr)
-	, touchdown_(false)
 {
 	auto lBorder = new Border({-Border::WIDTH, 0}, contentSize_.height);
 	children_.push_back(shared_ptr<Node>(lBorder));
@@ -58,28 +57,6 @@ void GameField::DropFigure()
 }
 
 ///
-void GameField::Update(float dt)
-{
-	lock_guard<mutex> lock(actionsAccess_);
-	for(auto action : actions_)
-	{
-		action();
-	}
-	actions_.clear();
-
-	if (touchdown_)
-	{
-		if (touchdownCallback_)
-			touchdownCallback_();
-		touchdown_ = false;
-		DropFigure();
-		NewFigure();
-	}
-
-	TexturedNode::Update(dt);
-}
-
-///
 void GameField::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
 {
 	glUniform1i(program.uniforms.useColor, 1);
@@ -91,37 +68,25 @@ void GameField::Render(const ShaderProgram& program, const GLKMatrix4& modelView
 ///
 void GameField::MoveLeft()
 {
-	lock_guard<mutex> lock(actionsAccess_);
-	actions_.push_back([&]{
-		activeFigure_->MoveLeft([&](const GridPoint& p) { return ValidateMove(p); });
-	});
+	activeFigure_->MoveLeft([&](const GridPoint& p) { return ValidateMove(p); });
 }
 
 ///
 void GameField::MoveRight()
 {
-	lock_guard<mutex> lock(actionsAccess_);
-	actions_.push_back([&]{
-		activeFigure_->MoveRight([&](const GridPoint& p) { return ValidateMove(p); });
-	});
+	activeFigure_->MoveRight([&](const GridPoint& p) { return ValidateMove(p); });
 }
 
 ///
 void GameField::MoveDown()
 {
-	lock_guard<mutex> lock(actionsAccess_);
-	actions_.push_back([&]{
-		activeFigure_->MoveDown([&](const GridPoint& p) { return ValidateMoveDown(p); });
-	});
+	activeFigure_->MoveDown([&](const GridPoint& p) { return ValidateMoveDown(p); });
 }
 
 ///
 void GameField::Rotate()
 {
-	lock_guard<mutex> lock(actionsAccess_);
-	actions_.push_back([&]{
-		activeFigure_->Rotate([&](const GridPoint& p, const USize& s) { return ValidateRotation(p, s); });
-	});
+	activeFigure_->Rotate([&](const GridPoint& p, const USize& s) { return ValidateRotation(p, s); });
 }
 
 ///
@@ -135,8 +100,14 @@ bool GameField::ValidateMove(const GridPoint& newPosition) const
 ///
 bool GameField::ValidateMoveDown(const GridPoint& newPosition) const
 {
-	touchdown_ = newPosition.y < 0 || figureStack_->CollidesWith(*activeFigure_, newPosition);
-	return !touchdown_;
+	if (newPosition.y < 0 || figureStack_->CollidesWith(*activeFigure_, newPosition))
+	{
+		if (touchdownCallback_)
+			touchdownCallback_();
+		return false;
+	}
+
+	return true;
 }
 
 ///

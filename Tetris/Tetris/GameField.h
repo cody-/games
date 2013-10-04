@@ -13,9 +13,7 @@
 #include "./SingleFigure.h"
 #include "./FigureStack.h"
 #include <memory>
-#include <vector>
 #include <functional>
-#include <mutex>
 
 ///
 class GameField
@@ -25,7 +23,6 @@ public:
 	static unsigned int Width();
 
 	GameField(CGFloat height, std::function<std::shared_ptr<SingleFigure>()> figureGenerator);
-	void Update(float dt) override;
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 	void MoveLeft();
@@ -33,12 +30,13 @@ public:
 	void MoveDown();
 	void Rotate();
 
+	void NewFigure();
+	void DropFigure();
+
 	void SetTouchdownCallback(std::function<void()> cb) { touchdownCallback_ = cb; }
 	void SetLinesCallback(std::function<void(unsigned)> cb) { linesCallback_ = cb; }
 
 private:
-	void NewFigure();
-	void DropFigure();
 	bool ValidateMove(const GridPoint& newPosition) const;
 	bool ValidateMoveDown(const GridPoint& newPosition) const;
 	bool ValidateRotation(const GridPoint& newPosition, const USize& newSize) const;
@@ -51,10 +49,6 @@ private:
 	std::function<void(unsigned)> linesCallback_;
 	std::shared_ptr<SingleFigure> activeFigure_;
 	std::shared_ptr<FigureStack> figureStack_;
-
-	std::vector<std::function<void()>> actions_;
-	std::mutex actionsAccess_;
-	mutable bool touchdown_;
 };
 
 #endif /* defined(__Tetris__GameField__) */

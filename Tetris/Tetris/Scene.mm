@@ -34,10 +34,10 @@ Scene::Scene(const CGSize& size)
 	gameField_->SetPosition(CGPointMake(offset, 0));
 	nextController_->SetPosition({offset + gameField_->ContentSize().width + Square::SIDE, contentSize_.height - nextController_->ContentSize().height - Square::SIDE});
 	
-	children_.push_back(unique_ptr<Node>(new Button("rotate-ccw.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), btnY}, [&]{ gameField_->Rotate(); })));
-	children_.push_back(unique_ptr<Node>(new Button("arrow left.png", btnRadius, {btnOffsetX, btnY}, [&]{ gameField_->MoveLeft(); })));
-	children_.push_back(unique_ptr<Node>(new Button("arrow right.png", btnRadius, {2*btnOffsetX + 2*btnRadius, btnY}, [&]{ gameField_->MoveRight(); })));
-	children_.push_back(unique_ptr<Node>(new Button("arrow down.png", btnRadius, {btnOffsetX*1.5f + btnRadius, btnY - 2*btnRadius}, [&]{ gameField_->MoveDown(); })));
+	children_.push_back(unique_ptr<Node>(new Button("rotate-ccw.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), btnY}, [&]{ ButtonPressed(Btn::ROTATE); })));
+	children_.push_back(unique_ptr<Node>(new Button("arrow left.png", btnRadius, {btnOffsetX, btnY}, [&]{ ButtonPressed(Btn::LEFT); })));
+	children_.push_back(unique_ptr<Node>(new Button("arrow right.png", btnRadius, {2*btnOffsetX + 2*btnRadius, btnY}, [&]{ ButtonPressed(Btn::RIGHT); })));
+	children_.push_back(unique_ptr<Node>(new Button("arrow down.png", btnRadius, {btnOffsetX*1.5f + btnRadius, btnY - 2*btnRadius}, [&]{ ButtonPressed(Btn::DOWN); })));
 
 
 	infoPanel_ = make_shared<InfoPanel>();
@@ -59,15 +59,24 @@ bool Scene::HandleTap(const CGPoint& point)
 }
 
 ///
-void Scene::SetTouchdownCallback(std::function<void ()> cb)
-{
-	gameField_->SetTouchdownCallback(cb);
-}
-
-///
 void Scene::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
 {
 	glUniform1i(program.uniforms.useColor, 0);
 
 	TexturedNode::Render(program, modelViewMatrix);
+}
+
+///
+void Scene::ButtonPressed(const Btn btn)
+{
+	try {
+		triggers_.at(btn)();
+	}
+	catch(const out_of_range&) {}
+}
+
+///
+void Scene::SetTrigger(Btn btn, function<void()> trigger)
+{
+	triggers_[btn] = trigger;
 }
