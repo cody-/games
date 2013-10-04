@@ -60,6 +60,7 @@ bool g_resetTouchTimer = false;
 	scene_->SetTrigger(Btn::LEFT, [=]{ game_->MoveLeft(); });
 	scene_->SetTrigger(Btn::RIGHT, [=]{ game_->MoveRight(); });
 	scene_->SetTrigger(Btn::DOWN, [=]{ game_->MoveDown(); });
+	scene_->SetTrigger(Btn::SETTINGS, [=]{ game_->Pause(); });
 
 	[self.view setMultipleTouchEnabled:YES];
 

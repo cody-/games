@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C303602C17E7587700C53BC1 /* rotate-ccw.png in Resources */ = {isa = PBXBuildFile; fileRef = C303602B17E7587700C53BC1 /* rotate-ccw.png */; };
 		C317A45317FDC53A00E5FC2D /* Game.mm in Sources */ = {isa = PBXBuildFile; fileRef = C317A45117FDC53A00E5FC2D /* Game.mm */; };
+		C317A45517FE995200E5FC2D /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = C317A45417FE995200E5FC2D /* gear.png */; };
 		C3806B3B17D8E67800207C36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3A17D8E67800207C36 /* UIKit.framework */; };
 		C3806B3D17D8E67800207C36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3C17D8E67800207C36 /* Foundation.framework */; };
 		C3806B3F17D8E67800207C36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3E17D8E67800207C36 /* CoreGraphics.framework */; };
@@ -58,6 +59,7 @@
 		C303602B17E7587700C53BC1 /* rotate-ccw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "rotate-ccw.png"; path = "Tetris/rotate-ccw.png"; sourceTree = "<group>"; };
 		C317A45117FDC53A00E5FC2D /* Game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Game.mm; sourceTree = "<group>"; };
 		C317A45217FDC53A00E5FC2D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		C317A45417FE995200E5FC2D /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = Tetris/gear.png; sourceTree = "<group>"; };
 		C3806B3717D8E67800207C36 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3806B3A17D8E67800207C36 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C3806B3C17D8E67800207C36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -251,6 +253,7 @@
 		C3806BA517DB0E3700207C36 /* rsrc */ = {
 			isa = PBXGroup;
 			children = (
+				C317A45417FE995200E5FC2D /* gear.png */,
 				C3806BF517E1DBE500207C36 /* black-square32.png */,
 				C3806BF117E1C22600207C36 /* bg-abstract.jpg */,
 				C3806BF217E1C22600207C36 /* bg-tech.jpg */,
@@ -321,6 +324,7 @@
 				C3806B9C17D9C64200207C36 /* Shader.fsh in Resources */,
 				C3806B4517D8E67800207C36 /* InfoPlist.strings in Resources */,
 				C3806B4D17D8E67800207C36 /* Default.png in Resources */,
+				C317A45517FE995200E5FC2D /* gear.png in Resources */,
 				C3806B4F17D8E67800207C36 /* Default@2x.png in Resources */,
 				C3806B5117D8E67800207C36 /* Default-568h@2x.png in Resources */,
 				C3806B5F17D8E84000207C36 /* MainStoryboard.storyboard in Resources */,

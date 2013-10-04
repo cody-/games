@@ -17,7 +17,8 @@ enum class Btn
 	LEFT,
 	RIGHT,
 	DOWN,
-	ROTATE
+	ROTATE,
+	SETTINGS
 };
 
 ///

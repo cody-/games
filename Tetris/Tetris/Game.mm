@@ -25,6 +25,7 @@ Game::Game(GameField& gameField, InfoPanel& infoPanel)
 	, timeSinceLastMoveDown_(0.0f)
 	, touchdown_(false)
 	, linesCounter_(0)
+	, paused_(false)
 {
 	gameField_.SetTouchdownCallback([&]{ TouchDown(); });
 	gameField_.SetLinesCallback([&](unsigned linesCount) { UpdateLines(linesCount); });
@@ -34,6 +35,9 @@ Game::Game(GameField& gameField, InfoPanel& infoPanel)
 ///
 void Game::Update(float dt)
 {
+	if (paused_)
+		return;
+
 	PerformActions();
 
 	timeSinceLastMoveDown_ += dt;
@@ -45,12 +49,23 @@ void Game::Update(float dt)
 
 	if (touchdown_)
 	{
+		touchdown_ = false;
 		if (touchdownCallback_)
 			touchdownCallback_();
-		touchdown_ = false;
+
 		gameField_.DropFigure();
 		gameField_.NewFigure();
 	}
+}
+
+///
+void Game::AddAction(function<void()> action)
+{
+	if (paused_)
+		return;
+
+	lock_guard<mutex> lock(actionsAccess_);
+	actions_.push_back(action);
 }
 
 ///
@@ -67,37 +82,31 @@ void Game::PerformActions()
 ///
 void Game::MoveLeft()
 {
-	lock_guard<mutex> lock(actionsAccess_);
-	actions_.push_back([&]{
-		gameField_.MoveLeft();
-	});
+	AddAction([&]{ gameField_.MoveLeft(); });
 }
 
 ///
 void Game::MoveRight()
 {
-	lock_guard<mutex> lock(actionsAccess_);
-	actions_.push_back([&]{
-		gameField_.MoveRight();
-	});
+	AddAction([&]{ gameField_.MoveRight(); });
 }
 
 ///
 void Game::MoveDown()
 {
-	lock_guard<mutex> lock(actionsAccess_);
-	actions_.push_back([&]{
-		gameField_.MoveDown();
-	});
+	AddAction([&]{ gameField_.MoveDown(); });
 }
 
 ///
 void Game::Rotate()
 {
-	lock_guard<mutex> lock(actionsAccess_);
-	actions_.push_back([&]{
-		gameField_.Rotate();
-	});
+	AddAction([&]{ gameField_.Rotate(); });
+}
+
+///
+void Game::Pause()
+{
+	paused_ = !paused_;
 }
 
 ///

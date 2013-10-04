@@ -33,7 +33,8 @@ Scene::Scene(const CGSize& size)
 
 	gameField_->SetPosition(CGPointMake(offset, 0));
 	nextController_->SetPosition({offset + gameField_->ContentSize().width + Square::SIDE, contentSize_.height - nextController_->ContentSize().height - Square::SIDE});
-	
+
+	children_.push_back(unique_ptr<Node>(new Button("gear.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), size.height - (btnOffsetX + 2*btnRadius)}, [&]{ ButtonPressed(Btn::SETTINGS); })));
 	children_.push_back(unique_ptr<Node>(new Button("rotate-ccw.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), btnY}, [&]{ ButtonPressed(Btn::ROTATE); })));
 	children_.push_back(unique_ptr<Node>(new Button("arrow left.png", btnRadius, {btnOffsetX, btnY}, [&]{ ButtonPressed(Btn::LEFT); })));
 	children_.push_back(unique_ptr<Node>(new Button("arrow right.png", btnRadius, {2*btnOffsetX + 2*btnRadius, btnY}, [&]{ ButtonPressed(Btn::RIGHT); })));

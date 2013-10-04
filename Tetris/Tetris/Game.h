@@ -27,10 +27,12 @@ public:
 	void MoveRight();
 	void MoveDown();
 	void Rotate();
+	void Pause();
 
 	void SetTouchdownCallback(std::function<void()> cb) { touchdownCallback_ = cb; }
 
 private:
+	void AddAction(std::function<void()> action);
 	void PerformActions();
 	void SetSpeed(unsigned speedLevel);
 	void TouchDown();
@@ -50,6 +52,8 @@ private:
 
 	bool touchdown_;
 	unsigned linesCounter_;
+
+	bool paused_;
 };
 
 #endif /* defined(__Tetris__Game__) */
