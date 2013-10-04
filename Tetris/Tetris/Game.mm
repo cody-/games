@@ -8,18 +8,27 @@
 
 #include "./Game.h"
 #include "./GameField.h"
+#include "./InfoPanel.h"
 
 using namespace std;
 
+namespace
+{
+	const float BASE_SPEED = 0.5f;
+}
+
 ///
-Game::Game(GameField& gameField)
+Game::Game(GameField& gameField, InfoPanel& infoPanel)
 	: gameField_(gameField)
+	, infoPanel_(infoPanel)
 	, touchdownCallback_(nullptr)
 	, timeSinceLastMoveDown_(0.0f)
 	, touchdown_(false)
+	, linesCounter_(0)
 {
 	gameField_.SetTouchdownCallback([&]{ TouchDown(); });
-	SetSpeed(3.0f);
+	gameField_.SetLinesCallback([&](unsigned linesCount) { UpdateLines(linesCount); });
+	SetSpeed(1U);
 }
 
 ///
@@ -92,10 +101,11 @@ void Game::Rotate()
 }
 
 ///
-void Game::SetSpeed(float speed)
+void Game::SetSpeed(unsigned speedLevel)
 {
-	speed_ = speed;
-	movePeriodSec_ = 1.0f/speed_;
+	speedLevel_ = speedLevel;
+	infoPanel_.SetSpeed(speedLevel_);
+	movePeriodSec_ = 1.0f/(BASE_SPEED + static_cast<float>(speedLevel_));
 }
 
 ///
@@ -104,4 +114,11 @@ void Game::TouchDown()
 	touchdown_ = true;
 	if (touchdownCallback_)
 		touchdownCallback_();
+}
+
+///
+void Game::UpdateLines(unsigned int diff)
+{
+	linesCounter_ += diff;
+	infoPanel_.SetLines(linesCounter_);
 }

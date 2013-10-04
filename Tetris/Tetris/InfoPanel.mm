@@ -59,7 +59,13 @@ shared_ptr<NumberLabel> InfoPanel::AddPanel(unsigned position, string labelText,
 }
 
 ///
-void InfoPanel::UpdateLines(int diff)
+void InfoPanel::SetLines(unsigned val)
 {
-	lines_->SetVal(lines_->Val() + diff);
+	lines_->SetVal(val);
+}
+
+///
+void InfoPanel::SetSpeed(unsigned val)
+{
+	speed_->SetVal(val);
 }

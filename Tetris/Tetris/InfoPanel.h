@@ -21,7 +21,8 @@ public:
 	InfoPanel();
 
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
-	void UpdateLines(int diff);
+	void SetLines(unsigned val);
+	void SetSpeed(unsigned val);
 
 private:
 	std::shared_ptr<NumberLabel> AddPanel(unsigned position, std::string labelText, unsigned initialVal);

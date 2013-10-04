@@ -14,12 +14,13 @@
 #include <mutex>
 
 class GameField;
+class InfoPanel;
 
 ///
 class Game
 {
 public:
-	Game(GameField& gameField);
+	Game(GameField& gameField, InfoPanel& infoPanel);
 	void Update(float dt);
 
 	void MoveLeft();
@@ -31,10 +32,12 @@ public:
 
 private:
 	void PerformActions();
-	void SetSpeed(float speed);
+	void SetSpeed(unsigned speedLevel);
 	void TouchDown();
+	void UpdateLines(unsigned diff);
 
 	GameField& gameField_;
+	InfoPanel& infoPanel_;
 
 	std::function<void()> touchdownCallback_;
 
@@ -42,10 +45,11 @@ private:
 	std::mutex actionsAccess_;
 
 	float timeSinceLastMoveDown_;
-	float speed_;  // cells per second
-	float movePeriodSec_;
+	unsigned speedLevel_;
+	float movePeriodSec_; // time to move through one cell
 
 	bool touchdown_;
+	unsigned linesCounter_;
 };
 
 #endif /* defined(__Tetris__Game__) */

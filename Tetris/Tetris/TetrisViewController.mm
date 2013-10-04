@@ -53,7 +53,7 @@ bool g_resetTouchTimer = false;
 	program_->projectionMatrix = GLKMatrix4MakeOrtho(0, windowSize.width, 0, windowSize.height, -1024, 1024);
 	scene_ = new Scene(windowSize);
 
-	game_ = new Game(scene_->GameFieldRef());
+	game_ = new Game(scene_->GameFieldRef(), scene_->InfoPanelRef());
 	game_->SetTouchdownCallback([&]{ g_resetTouchTimer = true; });
 
 	scene_->SetTrigger(Btn::ROTATE, [=]{ game_->Rotate(); });

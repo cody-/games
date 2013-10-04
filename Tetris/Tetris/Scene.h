@@ -27,11 +27,14 @@ public:
 	bool HandleTap(const CGPoint& point) override;
 
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
-	GameField& GameFieldRef() { return *gameField_; }
-	void ButtonPressed(Btn btn);
 	void SetTrigger(Btn btn, std::function<void()> trigger);
 
+	GameField& GameFieldRef() { return *gameField_; }
+	InfoPanel& InfoPanelRef() { return *infoPanel_; }
+
 private:
+	void ButtonPressed(Btn btn);
+
 	std::shared_ptr<NextController> nextController_;
 	std::shared_ptr<GameField> gameField_;
 	std::shared_ptr<InfoPanel> infoPanel_;

@@ -39,11 +39,9 @@ Scene::Scene(const CGSize& size)
 	children_.push_back(unique_ptr<Node>(new Button("arrow right.png", btnRadius, {2*btnOffsetX + 2*btnRadius, btnY}, [&]{ ButtonPressed(Btn::RIGHT); })));
 	children_.push_back(unique_ptr<Node>(new Button("arrow down.png", btnRadius, {btnOffsetX*1.5f + btnRadius, btnY - 2*btnRadius}, [&]{ ButtonPressed(Btn::DOWN); })));
 
-
 	infoPanel_ = make_shared<InfoPanel>();
 	infoPanel_->SetPosition({offset + gameField_->ContentSize().width + Square::SIDE, contentSize_.height - nextController_->ContentSize().height - 2*Square::SIDE - infoPanel_->ContentSize().height});
 	children_.push_back(infoPanel_);
-	gameField_->SetLinesCallback([&](unsigned linesCount) { infoPanel_->UpdateLines(linesCount); });
 }
 
 ///
