@@ -13,6 +13,7 @@
 #include "./GameField.h"
 #include "./NextController.h"
 #include "./InfoPanel.h"
+#include "./SettingsPanel.h"
 #include "./Button.h"
 #include <memory>
 #include <functional>
@@ -38,6 +39,7 @@ private:
 	std::shared_ptr<NextController> nextController_;
 	std::shared_ptr<GameField> gameField_;
 	std::shared_ptr<InfoPanel> infoPanel_;
+	std::shared_ptr<SettingsPanel> settingsPanel_;
 	std::map<Btn, std::function<void()>> triggers_;
 };
 

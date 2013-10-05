@@ -9,11 +9,22 @@
 #include "Border.h"
 
 ///
-Border::Border(CGPoint position, CGFloat height)
-	: line_({position, {position.x, position.y + height}})
+Border::Border(CGPoint position, CGFloat length, BorderType type)
+	: line_({{0, 0}, {0, 0}})
 {
 	SetPosition(position);
-	contentSize_ = CGSizeMake(WIDTH, height);
+	
+	switch (type)
+	{
+	case BorderType::HORIZONTAL:
+		line_.p2.x += length;
+		contentSize_ = CGSizeMake(length, WIDTH);
+		break;
+	case BorderType::VERTICAL:
+		line_.p2.y += length;
+		contentSize_ = CGSizeMake(WIDTH, length);
+		break;
+	}
 }
 
 ///
@@ -21,7 +32,6 @@ void Border::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMat
 {
 	Node::Render(program, modelViewMatrix);
 
-	glDisable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glLineWidth(WIDTH);

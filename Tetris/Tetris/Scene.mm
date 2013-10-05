@@ -32,7 +32,9 @@ Scene::Scene(const CGSize& size)
 	children_.push_back(gameField_);
 
 	gameField_->SetPosition(CGPointMake(offset, 0));
-	nextController_->SetPosition({offset + gameField_->ContentSize().width + Square::SIDE, contentSize_.height - nextController_->ContentSize().height - Square::SIDE});
+
+	CGFloat nearGameField = offset + gameField_->ContentSize().width + Square::SIDE;
+	nextController_->SetPosition({nearGameField, contentSize_.height - nextController_->ContentSize().height - Square::SIDE});
 
 	children_.push_back(unique_ptr<Node>(new Button("gear.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), size.height - (btnOffsetX + 2*btnRadius)}, [&]{ ButtonPressed(Btn::SETTINGS); })));
 	children_.push_back(unique_ptr<Node>(new Button("rotate-ccw.png", btnRadius, {size.width - (btnOffsetX + 2*btnRadius), btnY}, [&]{ ButtonPressed(Btn::ROTATE); })));
@@ -41,8 +43,13 @@ Scene::Scene(const CGSize& size)
 	children_.push_back(unique_ptr<Node>(new Button("arrow down.png", btnRadius, {btnOffsetX*1.5f + btnRadius, btnY - 2*btnRadius}, [&]{ ButtonPressed(Btn::DOWN); })));
 
 	infoPanel_ = make_shared<InfoPanel>();
-	infoPanel_->SetPosition({offset + gameField_->ContentSize().width + Square::SIDE, contentSize_.height - nextController_->ContentSize().height - 2*Square::SIDE - infoPanel_->ContentSize().height});
+	CGFloat infoPanelPosY = contentSize_.height - nextController_->ContentSize().height - 2*Square::SIDE - infoPanel_->ContentSize().height;
+	infoPanel_->SetPosition({nearGameField, infoPanelPosY});
 	children_.push_back(infoPanel_);
+
+	settingsPanel_ = make_shared<SettingsPanel>(CGSize{contentSize_.width - nearGameField, infoPanelPosY - Square::SIDE});
+	settingsPanel_->SetPosition({nearGameField, 0});
+	children_.push_back(settingsPanel_);
 }
 
 ///

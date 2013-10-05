@@ -10,6 +10,7 @@
 		C303602C17E7587700C53BC1 /* rotate-ccw.png in Resources */ = {isa = PBXBuildFile; fileRef = C303602B17E7587700C53BC1 /* rotate-ccw.png */; };
 		C317A45317FDC53A00E5FC2D /* Game.mm in Sources */ = {isa = PBXBuildFile; fileRef = C317A45117FDC53A00E5FC2D /* Game.mm */; };
 		C317A45517FE995200E5FC2D /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = C317A45417FE995200E5FC2D /* gear.png */; };
+		C317A45817FEEBC500E5FC2D /* SettingsPanel.mm in Sources */ = {isa = PBXBuildFile; fileRef = C317A45617FEEBC500E5FC2D /* SettingsPanel.mm */; };
 		C3806B3B17D8E67800207C36 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3A17D8E67800207C36 /* UIKit.framework */; };
 		C3806B3D17D8E67800207C36 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3C17D8E67800207C36 /* Foundation.framework */; };
 		C3806B3F17D8E67800207C36 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3806B3E17D8E67800207C36 /* CoreGraphics.framework */; };
@@ -25,7 +26,6 @@
 		C3806B5F17D8E84000207C36 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3806B5E17D8E84000207C36 /* MainStoryboard.storyboard */; };
 		C3806B9B17D9C63F00207C36 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C3806B9717D9BD3B00207C36 /* Shader.vsh */; };
 		C3806B9C17D9C64200207C36 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C3806B9917D9BD5300207C36 /* Shader.fsh */; };
-		C3806BA817DB0E5300207C36 /* black-square40.png in Resources */ = {isa = PBXBuildFile; fileRef = C3806BA617DB0E5300207C36 /* black-square40.png */; };
 		C3806BB317DE1C5000207C36 /* Node.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB217DE1C5000207C36 /* Node.mm */; };
 		C3806BB617DE201800207C36 /* TexturedNode.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB517DE201800207C36 /* TexturedNode.mm */; };
 		C3806BBB17DE2AA300207C36 /* Scene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C3806BB917DE2AA200207C36 /* Scene.mm */; };
@@ -60,6 +60,8 @@
 		C317A45117FDC53A00E5FC2D /* Game.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Game.mm; sourceTree = "<group>"; };
 		C317A45217FDC53A00E5FC2D /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		C317A45417FE995200E5FC2D /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gear.png; path = Tetris/gear.png; sourceTree = "<group>"; };
+		C317A45617FEEBC500E5FC2D /* SettingsPanel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SettingsPanel.mm; sourceTree = "<group>"; };
+		C317A45717FEEBC500E5FC2D /* SettingsPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsPanel.h; sourceTree = "<group>"; };
 		C3806B3717D8E67800207C36 /* Tetris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tetris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3806B3A17D8E67800207C36 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C3806B3C17D8E67800207C36 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -232,6 +234,8 @@
 				C398FAD817ED80EB00ECECBA /* InfoPanel.mm */,
 				C398FADC17ED89E600ECECBA /* NumberLabel.h */,
 				C398FADB17ED89E500ECECBA /* NumberLabel.mm */,
+				C317A45717FEEBC500E5FC2D /* SettingsPanel.h */,
+				C317A45617FEEBC500E5FC2D /* SettingsPanel.mm */,
 			);
 			path = Tetris;
 			sourceTree = "<group>";
@@ -328,7 +332,6 @@
 				C3806B4F17D8E67800207C36 /* Default@2x.png in Resources */,
 				C3806B5117D8E67800207C36 /* Default-568h@2x.png in Resources */,
 				C3806B5F17D8E84000207C36 /* MainStoryboard.storyboard in Resources */,
-				C3806BA817DB0E5300207C36 /* black-square40.png in Resources */,
 				C3806BE817E18E4F00207C36 /* arrow down.png in Resources */,
 				C3806BE917E18E4F00207C36 /* arrow left.png in Resources */,
 				C3806BEA17E18E4F00207C36 /* arrow right.png in Resources */,
@@ -350,6 +353,7 @@
 				C3806B4717D8E67800207C36 /* main.m in Sources */,
 				C3806B4B17D8E67800207C36 /* AppDelegate.m in Sources */,
 				C3806B5D17D8E71700207C36 /* TetrisViewController.mm in Sources */,
+				C317A45817FEEBC500E5FC2D /* SettingsPanel.mm in Sources */,
 				C3806BB317DE1C5000207C36 /* Node.mm in Sources */,
 				C3806BB617DE201800207C36 /* TexturedNode.mm in Sources */,
 				C317A45317FDC53A00E5FC2D /* Game.mm in Sources */,

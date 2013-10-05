@@ -12,6 +12,8 @@
 #include "./Node.h"
 #include "./Types.h"
 
+enum class BorderType { HORIZONTAL, VERTICAL };
+
 ///
 class Border
 	: public Node
@@ -19,7 +21,7 @@ class Border
 public:
 	static const unsigned short WIDTH = 1;
 
-	Border(CGPoint position, CGFloat height);
+	Border(CGPoint position, CGFloat length, BorderType type);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 private:

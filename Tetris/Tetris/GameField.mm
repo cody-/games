@@ -26,9 +26,9 @@ GameField::GameField(CGFloat height, function<shared_ptr<SingleFigure>()> figure
 	, figureGenerator_(figureGenerator)
 	, touchdownCallback_(nullptr)
 {
-	auto lBorder = new Border({-Border::WIDTH, 0}, contentSize_.height);
+	auto lBorder = new Border({-Border::WIDTH, 0}, contentSize_.height, BorderType::VERTICAL);
 	children_.push_back(shared_ptr<Node>(lBorder));
-	auto rBorder = new Border({contentSize_.width, 0}, contentSize_.height);
+	auto rBorder = new Border({contentSize_.width + 1, 0}, contentSize_.height, BorderType::VERTICAL);
 	children_.push_back(shared_ptr<Node>(rBorder));
 
 	NewFigure();
