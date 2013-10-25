@@ -12,7 +12,17 @@
 using namespace std;
 
 ///
-TextLabel::TextLabel(string label, string fontName, unsigned fontSize)
+TextLabel::TextLabel(string label, string fontName, unsigned fontSize, const GLKVector3& color)
 	: TexturedNode(TextureLoader::Instance()->GetTextTexture(label, fontName, fontSize))
+	, textColor_(color)
 {
+}
+
+///
+void TextLabel::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
+{
+	glUniform1i(program.uniforms.useColor, 1);
+	glUniform4f(program.uniforms.color, textColor_.r, textColor_.g, textColor_.b, 1.0);
+
+	TexturedNode::Render(program, modelViewMatrix);
 }

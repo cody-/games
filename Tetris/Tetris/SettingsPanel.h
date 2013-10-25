@@ -11,6 +11,7 @@
 
 #include "./Node.h"
 #include "./Border.h"
+#include <string>
 
 ///
 class SettingsPanel
@@ -19,8 +20,15 @@ class SettingsPanel
 public:
 	SettingsPanel(CGSize size);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
+	void Toggle();
 
 private:
+	bool visible_;
+	float borderPadding_;
+	const unsigned short lineHeight_;
+	const std::string fontName_;
+	const unsigned fontSize_;
+	
 	std::shared_ptr<Border> vBorder_;
 	std::shared_ptr<Border> hBorder_;
 };

@@ -32,24 +32,15 @@ InfoPanel::InfoPanel()
 }
 
 ///
-void InfoPanel::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix)
-{
-	glUniform1i(program.uniforms.useColor, 1);
-	glUniform4f(program.uniforms.color, textColor_.r, textColor_.g, textColor_.b, 1.0);
-
-	Node::Render(program, modelViewMatrix);
-}
-
-///
 shared_ptr<NumberLabel> InfoPanel::AddPanel(unsigned position, string labelText, unsigned initialVal)
 {
 	const float offsetY = position * lineHeight_;
 
-	auto label = make_shared<TextLabel>(labelText + ":", fontName_, fontSize_);
+	auto label = make_shared<TextLabel>(labelText + ":", fontName_, fontSize_, textColor_);
 	label->SetPosition({0, offsetY});
 	children_.push_back(label);
 
-	auto val = make_shared<NumberLabel>(initialVal, fontName_, fontSize_);
+	auto val = make_shared<NumberLabel>(initialVal, fontName_, fontSize_, textColor_);
 	val->SetPosition({static_cast<CGFloat>(labelWidth_), offsetY});
 	children_.push_back(val);
 

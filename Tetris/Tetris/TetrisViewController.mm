@@ -209,6 +209,7 @@ bool g_resetTouchTimer = false;
 - (void)update
 {
 	game_->Update(self.timeSinceLastUpdate);
+	scene_->Update(self.timeSinceLastUpdate);
 	if (g_resetTouchTimer)
 		[self resetTouchTimer];
 }

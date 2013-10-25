@@ -20,7 +20,6 @@ class InfoPanel
 public:
 	InfoPanel();
 
-	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 	void SetLines(unsigned val);
 	void SetSpeed(unsigned val);
 

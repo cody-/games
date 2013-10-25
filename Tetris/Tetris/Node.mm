@@ -21,6 +21,14 @@ void Node::Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatri
 }
 
 ///
+void Node::Update(float dt)
+{
+	for_each(children_.begin(), children_.end(), [&](const shared_ptr<Node>& node) {
+		node->Update(dt);
+	});
+}
+
+///
 GLKMatrix4 Node::ModelMatrix() const
 {
 	GLKMatrix4 modelMatrix = GLKMatrix4Identity;

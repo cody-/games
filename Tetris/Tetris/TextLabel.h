@@ -16,7 +16,11 @@ class TextLabel
 	: public TexturedNode
 {
 public:
-	TextLabel(std::string label, std::string fontName, unsigned fontSize);
+	TextLabel(std::string label, std::string fontName, unsigned fontSize, const GLKVector3& color);
+	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
+
+private:
+	GLKVector3 textColor_;
 };
 
 #endif /* defined(__Tetris__TextLabel__) */

@@ -18,7 +18,7 @@ class NumberLabel
 	: public Node
 {
 public:
-	NumberLabel(unsigned initialVal, std::string fontName, unsigned fontSize);
+	NumberLabel(unsigned initialVal, std::string fontName, unsigned fontSize, const GLKVector3& color);
 	void Render(const ShaderProgram& program, const GLKMatrix4& modelViewMatrix) override;
 
 	unsigned Val() const { return val_; }
@@ -30,6 +30,7 @@ private:
 
 	GLKTextureInfo* textureInfo_;
 	const CGSize symbolSize_;
+	const GLKVector3 textColor_;
 	unsigned val_;
 	std::vector<TexturedVertex> vertices_;
 };

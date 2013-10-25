@@ -13,9 +13,10 @@
 using namespace std;
 
 ///
-NumberLabel::NumberLabel(unsigned initialVal, string fontName, unsigned fontSize)
+NumberLabel::NumberLabel(unsigned initialVal, string fontName, unsigned fontSize, const GLKVector3& color)
 	: textureInfo_(TextureLoader::Instance()->GetTextTexture("0123456789", fontName, fontSize))
 	, symbolSize_({textureInfo_.width/10.0f, static_cast<CGFloat>(textureInfo_.height)})
+	, textColor_(color)
 	, val_(initialVal)
 {
 	contentSize_.height = symbolSize_.height;
@@ -45,6 +46,8 @@ void NumberLabel::Render(const ShaderProgram& program, const GLKMatrix4& modelVi
 
 	glUniformMatrix4fv(program.uniforms.mvpMatrix, 1, NO, mvpMatrix.m);
 	glUniform1i(program.uniforms.texSampler, 0);
+	glUniform1i(program.uniforms.useColor, 1);
+	glUniform4f(program.uniforms.color, textColor_.r, textColor_.g, textColor_.b, 1.0);
 
 	glDrawArrays(GL_TRIANGLES, 0, vertices_.size());
 
